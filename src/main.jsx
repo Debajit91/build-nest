@@ -9,6 +9,9 @@ import "swiper/css/pagination";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 AOS.init({
   duration: 1000,
@@ -19,6 +22,8 @@ AOS.init({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 )
