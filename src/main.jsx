@@ -12,6 +12,8 @@ import "aos/dist/aos.css";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import "leaflet/dist/leaflet.css";
+import AuthProvider from './Contexts/AuthContext/AuthProvider.jsx';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +27,10 @@ AOS.init({
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

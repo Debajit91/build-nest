@@ -4,6 +4,10 @@ import Home from "../Pages/Home";
 import Apartments from "../Components/Apartments";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ManageCoupons from "../Pages/ManageCoupons";
+import AuthLayout from "../Layouts/AuthLayout";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import PrivateRoute from "../Routes/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +25,26 @@ export const router = createBrowserRouter([
     ]
   },
   {
+    path: '/',
+    Component: AuthLayout,
+    children:[
+      {
+        path: 'login',
+        Component: Login
+      },
+      {
+        path: 'register',
+        Component: Register
+      }
+    ]
+  },
+  {
     path: '/dashboard',
-    Component: DashboardLayout,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout/>
+      </PrivateRoute>
+    ),
     children:[
       {
         path: 'manage-coupons',

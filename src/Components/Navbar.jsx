@@ -3,19 +3,20 @@ import { Link, useNavigate } from "react-router";
 import { FaSignInAlt } from "react-icons/fa";
 // import useAuth from "../hooks/useAuth"; // Your custom hook for auth
 import Logo from '/Logo.png';
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-//   const { user, logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
-//   const handleLogout = async () => {
-//     try {
-//       await logOut();
-//       navigate("/login");
-//     } catch (error) {
-//       console.error("Logout failed", error);
-//     }
-//   };
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-md sticky top-0 z-50">
@@ -32,7 +33,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Side: Login or User Profile Dropdown */}
-        {/* <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
           {!user ? (
             <Link to="/login" className="text-xl btn btn-ghost btn-circle tooltip tooltip-bottom" data-tip="Login">
               <FaSignInAlt />
@@ -44,9 +45,9 @@ const Navbar = () => {
                   <img src={user.photoURL || "/default-avatar.png"} alt="profile" />
                 </div>
               </label>
-              <ul tabIndex={0} className="dropdown-content mt-3 z-[1] p-4 shadow bg-base-100 rounded-box w-52 space-y-2"> */}
+              <ul tabIndex={0} className="dropdown-content mt-3 z-[1] p-4 shadow bg-base-100 rounded-box w-52 space-y-2">
                 {/* ✅ UPDATED: User display name, not clickable */}
-                {/* <li className="text-center font-semibold text-sm text-neutral-content bg-neutral rounded p-2 cursor-default">
+                <li className="text-center font-semibold text-sm text-neutral-content bg-neutral rounded p-2 cursor-default">
                   {user.displayName || "User"}
                 </li>
                 <li>
@@ -57,8 +58,8 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-          )} */}
-        {/* </div> */}
+          )} 
+         </div>
       </div>
     </div>
   );
