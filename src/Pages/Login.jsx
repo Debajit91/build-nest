@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import useAuth from "../Hooks/useAuth";
-import { FcGoogle } from "react-icons/fc";
+import GoogleSignIn from "../Components/GoogleSignIn";
 
 const Login = () => {
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,10 +37,7 @@ const Login = () => {
 
       <div className="divider text-black">OR</div>
 
-      <button type="button" className="btn text-black btn-outline w-full" onClick={signInWithGoogle}>
-        <FcGoogle />
-        Continue with Google
-      </button>
+      <GoogleSignIn/>
 
       <p className="text-center mt-4 text-sm text-black">
         Don’t have an account? <Link to="/register" className="text-blue-600 font-medium">Register</Link>
