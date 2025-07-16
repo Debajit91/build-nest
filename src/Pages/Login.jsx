@@ -5,9 +5,10 @@ import GoogleSignIn from "../Components/GoogleSignIn";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import saveUser from "../api/saveUser";
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,12 @@ const Login = () => {
     e.preventDefault();
     try {
       await signIn(email, password);
+
+      await saveUser({
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      });
 
       // success alert
       Swal.fire({

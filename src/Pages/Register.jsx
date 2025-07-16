@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import GoogleSignIn from "../Components/GoogleSignIn";
+import saveUser from "../api/saveUser";
 
 const imgbbAPI = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -68,7 +69,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password, image } = formData;
+    let { name, email, password, image } = formData;
+
+    
+    name = name.trim();
+    email = email.trim().toLowerCase();
 
     if (!validatePassword(password)) return;
 
@@ -78,16 +83,28 @@ const Register = () => {
       let imageURL = "";
       if (image) {
         imageURL = await handleImageUpload(image);
-        if (!imageURL) return;
+
+        
+        if (!imageURL) {
+          setUploading(false);
+          return;
+        }
       }
 
+      // Firebase Auth
       await createUser(email, password);
       await updateUserProfile({
         displayName: name,
         photoURL: imageURL,
       });
 
-      setUploading(false);
+      // Save to MongoDB
+      const newUser = {
+        name,
+        email,
+        photoURL: imageURL,
+      };
+      await saveUser(newUser);
 
       Swal.fire({
         icon: "success",
@@ -98,8 +115,9 @@ const Register = () => {
 
       navigate("/dashboard");
     } catch (err) {
-      setUploading(false);
       toast.error(err.message);
+    } finally {
+      setUploading(false); 
     }
   };
 
@@ -108,56 +126,75 @@ const Register = () => {
       <Toaster />
       <form onSubmit={handleSubmit}>
         <div className="text-black">
-            <h2 className="text-3xl text-center mb-4">Register Your Account</h2>
-            <div className="form-control mb-4">
-          <input placeholder="Your Name"
-            type="text"
-            name="name"
-            className="input input-bordered w-full"
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <h2 className="text-3xl text-center mb-4">Register Your Account</h2>
 
-        <div className="form-control mb-4">
           
-          <input placeholder="Email"
-            type="email"
-            name="email"
-            className="input input-bordered w-full"
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-control mb-4">
-         
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            className="file-input file-input-bordered w-full"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-control mb-6">
-          <div className="relative">
-            <input placeholder="Password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              className="input input-bordered w-full pr-10"
+          <div className="form-control mb-4">
+            <label htmlFor="name" className="label-text mb-1">
+              Name
+            </label>
+            <input
+              placeholder="Your Name"
+              type="text"
+              name="name"
+              id="name"
+              className="input input-bordered w-full"
               onChange={handleChange}
               required
             />
-            <span
-              className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FiEyeOff /> : <FiEye />}
-            </span>
           </div>
-        </div>
+
+          <div className="form-control mb-4">
+            <label htmlFor="email" className="label-text mb-1">
+              Email
+            </label>
+            <input
+              placeholder="Email"
+              type="email"
+              name="email"
+              id="email"
+              className="input input-bordered w-full"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-control mb-4">
+            <label htmlFor="image" className="label-text mb-1">
+              Upload Photo (Optional)
+            </label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              className="file-input file-input-bordered w-full"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-control mb-6">
+            <label htmlFor="password" className="label-text mb-1">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                placeholder="Password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                className="input input-bordered w-full pr-10"
+                onChange={handleChange}
+                required
+              />
+              <span
+                className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FiEyeOff /> : <FiEye />}
+              </span>
+            </div>
+          </div>
         </div>
 
         <button
