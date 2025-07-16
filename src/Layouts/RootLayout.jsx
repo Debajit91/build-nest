@@ -9,7 +9,7 @@ const RootLayout = () => {
     <div className="min-h-screen flex flex-col bg-base-50 text-gray-800 max-w-7xl mx-auto">
       <Navbar />
       
-      <main className="flex-1 container mx-auto px-4 py-6">
+      <main className="flex-1 container mx-auto px-4 py-6 border-2 border-gray-200">
         <Outlet />
       </main>
 
