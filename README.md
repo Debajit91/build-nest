@@ -1,12 +1,84 @@
-# React + Vite
+# 🏢 BuildNest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**BuildNest** is a responsive, role-based Building Management System (BMS) built with React and Firebase. It supports user registration, authentication, apartment management, and admin controls—all tailored for managing a **single building**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live URL
 
-## Expanding the ESLint configuration
+**[🔗 Live Demo](https://your-live-site-url.com)**  
+_(Replace with your deployed URL)_
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🎯 Project Purpose
+
+The goal of **BuildNest** is to provide a robust, secure, and user-friendly building management platform where:
+- Users can register, login, and access member dashboards
+- Admins can manage apartments, coupons, announcements, and members
+- All operations are synchronized through Firebase Auth and MongoDB
+
+---
+
+## 🚀 Key Features
+
+- 🔐 **User Authentication** (Email/Password + Google Sign-in)
+- 🎨 **Responsive UI** with TailwindCSS + DaisyUI
+- 🧠 **Role-based Access** (`member`, `admin`, etc.)
+- 🧾 **Coupon Management**
+- 📢 **Announcements System**
+- 💳 **Payment Integration Ready**
+- 🗂️ **Protected Routes & Dashboards**
+- ☁️ **Image Upload via ImgBB**
+- 📦 **Data Storage using MongoDB Atlas**
+- 📍 **Interactive Maps using Leaflet**
+- 💬 **Notifications via SweetAlert2 and React Hot Toast**
+- 📡 **Global State Management** using React Query
+
+---
+
+## 🧰 Tech Stack & Packages
+
+### ✅ Frontend
+| Package | Purpose |
+|--------|---------|
+| `react` | Core frontend library |
+| `react-dom` | DOM rendering |
+| `react-router` | SPA routing |
+| `tailwindcss` | Utility-first CSS framework |
+| `daisyui` | UI component library for Tailwind |
+| `firebase` | Authentication |
+| `axios` | HTTP requests |
+| `react-hot-toast` | Toast notifications |
+| `sweetalert2` | Modal alerts |
+| `aos` | Scroll animations |
+| `react-icons` | Icon library |
+| `leaflet` + `react-leaflet` | Interactive maps |
+| `swiper` | Sliders / carousels |
+| `@tanstack/react-query` | Server state management |
+
+### 🛠️ Dev Dependencies
+| Package | Purpose |
+|--------|---------|
+| `vite` | Frontend build tool |
+| `@vitejs/plugin-react` | React support in Vite |
+| `eslint`, `eslint-plugin-*` | Linting |
+| `@types/react` / `@types/react-dom` | Type definitions for React (if using TypeScript) |
+
+---
+
+## 📁 Folder Structure (simplified)
+
+src/
+│
+├── Components/ # Reusable UI components
+├── Contexts/ # Auth context
+├── Pages/ # Login, Register, Dashboard, etc.
+├── api/ # Axios instance and saveUser.js
+├── router/ # React Router setup
+├── Firebase/ # Firebase config/init
+├── App.jsx
+└── main.jsx
+
+License
+MIT © 2025 — BuildNest by Debajit Roy
