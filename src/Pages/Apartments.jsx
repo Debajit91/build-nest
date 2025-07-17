@@ -1,33 +1,67 @@
 import React, { useState } from "react";
-import useApartments from "../Hooks/useApartments";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 const Apartments = () => {
   const [page, setPage] = useState(1);
-  const limit = 6;
-  const { apartments, loading } = useApartments();
+  const [minRent, setMinRent] = useState("");
+  const [maxRent, setMaxRent] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const fetchApartments = async ({ queryKey }) => {
-    const [_key, page] = queryKey;
-    const res = await axios.get(
-      `http://localhost:5000/apartments?page=${page}&limit=6`
-    );
-    return res.data;
+  const handleSearch = () => {
+    setPage(1);
+    setHasSearched(true);
+    refetch(); 
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["apartments", page],
-    queryFn: fetchApartments,
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["apartments", page, minRent, maxRent],
+    queryFn: async () => {
+      const res = await axios.get(
+        `http://localhost:5000/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}`
+      );
+      return res.data;
+    },
+    enabled: !hasSearched,
+    keepPreviousData: true, // smoother pagination
   });
 
-  if (isLoading) return <span className="loading loading-spinner"></span>;
+  {
+    isLoading && (
+      <div className="flex justify-center items-center h-40">
+        <span className="loading loading-spinner text-blue-500"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 bg-base-200 min-h-screen">
       <h2 className="text-3xl font-bold mb-6 text-center">
         Available Apartments
       </h2>
+
+      {/* 🔍 Filter Section */}
+      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        <input
+          type="number"
+          placeholder="Min Rent"
+          className="input input-bordered"
+          value={minRent}
+          onChange={(e) => setMinRent(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Max Rent"
+          className="input input-bordered"
+          value={maxRent}
+          onChange={(e) => setMaxRent(e.target.value)}
+        />
+        <button className="btn btn-primary" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
+
+      {/* 🏘️ Apartments List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data?.apartments?.map((apt) => (
           <div key={apt._id} className="card bg-base-100 shadow-xl">
@@ -47,7 +81,7 @@ const Apartments = () => {
                 <strong>Floor:</strong> {apt.floor}
               </p>
               <p>
-                <strong>Rent:</strong> ${apt.rent} BDT
+                <strong>Rent:</strong> {apt.rent} BDT
               </p>
               <p>
                 <strong>Status:</strong>{" "}
@@ -75,8 +109,10 @@ const Apartments = () => {
           </div>
         ))}
       </div>
+
+      {/* 🔢 Pagination */}
       <div className="flex justify-center mt-6 space-x-2">
-        {[...Array(data?.totalPages).keys()].map((p) => (
+        {[...Array(data?.totalPages || 0).keys()].map((p) => (
           <button
             key={p}
             onClick={() => setPage(p + 1)}
