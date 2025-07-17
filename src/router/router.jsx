@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home";
-import Apartments from "../Components/Apartments";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ManageCoupons from "../Pages/ManageCoupons";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Routes/PrivateRoute";
+import Apartments from "../Pages/Apartments";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         },
         {
           path: 'apartments',
-          Component: Apartments
+          Component:Apartments
         }
     ]
   },
