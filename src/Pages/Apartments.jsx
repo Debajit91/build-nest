@@ -1,23 +1,28 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import axiosInstance from "../api/axiosInstance";
 
 const Apartments = () => {
+  const { user } = useAuth();
   const [page, setPage] = useState(1);
   const [minRent, setMinRent] = useState("");
   const [maxRent, setMaxRent] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     setPage(1);
     setHasSearched(true);
-    refetch(); 
+    refetch();
   };
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["apartments", page, minRent, maxRent],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosInstance.get(
         `http://localhost:5000/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}`
       );
       return res.data;
@@ -33,6 +38,48 @@ const Apartments = () => {
       </div>
     );
   }
+
+  const handleAgreement = async (apt) => {
+    if (!user) {
+      return navigate("/login");
+    }
+    const agreementData = {
+      name: user.displayName,
+      email: user.email,
+      floor: apt.floor,
+      block: apt.block,
+      apartmentNo: apt.apartmentNo,
+      rent: apt.rent,
+      status: "pending",
+    };
+    try {
+      const res = await axiosInstance.post(
+        "http://localhost:5000/agreements",
+        agreementData
+      );
+
+      if (res.data.insertedId) {
+        Swal.fire("Success", "Agreement request submitted!", "success");
+      } else if (res.data.alreadyExists) {
+        Swal.fire("Oops!", "You already applied for this apartment", "info");
+      }
+
+      if (res.data.alreadyExists) {
+        Swal.fire("Oops!", "You already applied for one apartment!", "info");
+      } else if (res.data.apartmentTaken) {
+        Swal.fire("Oops!", "This apartment is already taken!", "error");
+      } else if (res.data.insertedId) {
+        Swal.fire(
+          "Success!",
+          "Your agreement request was submitted.",
+          "success"
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Something went wrong!", "error");
+    }
+  };
 
   return (
     <div className="p-6 bg-base-200 min-h-screen">
@@ -97,6 +144,7 @@ const Apartments = () => {
               </p>
               <div className="card-actions justify-end">
                 <button
+                  onClick={() => handleAgreement(apt)}
                   className={`btn btn-primary ${
                     apt.hasAgreement ? "opacity-50 cursor-not-allowed" : ""
                   }`}
