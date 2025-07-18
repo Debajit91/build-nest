@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router"; // fixed import
+import { useNavigate, Link, useLocation } from "react-router"; // fixed import
 import useAuth from "../Hooks/useAuth";
 import GoogleSignIn from "../Components/GoogleSignIn";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,21 +8,25 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import saveUser from "../api/saveUser";
 
 const Login = () => {
-  const { signIn, user } = useAuth();
+  const { signIn} = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const from = location.state?.from?.pathname || '/';
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signIn(email, password);
+      const result = await signIn(email, password);
+    const loggedInUser = result.user;
 
-      await saveUser({
-        name: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
+    await saveUser({
+      name: loggedInUser.displayName,
+      email: loggedInUser.email,
+      photoURL: loggedInUser.photoURL,
       });
 
       // success alert
@@ -34,7 +38,7 @@ const Login = () => {
         showConfirmButton: false,
       });
 
-      navigate("/dashboard");
+      navigate(from, {replace: true});
     } catch (err) {
       toast.error(err.message || "Login failed");
     }

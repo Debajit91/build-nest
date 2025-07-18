@@ -1,15 +1,19 @@
-import { Outlet, NavLink, Link } from "react-router";
+import { Outlet, NavLink, Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
-import Logo from '/Logo.png';
+import Logo from "/Logo.png";
+import toast from "react-hot-toast";
 
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     await logOut();
+    toast.success("Logged out successfully!");
+    navigate("/");
   };
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -18,28 +22,54 @@ const DashboardLayout = () => {
     <div className="min-h-screen flex bg-base-200 text-base-content">
       {/* Sidebar */}
       <div
-        className={`fixed z-30 lg:static lg:w-64 w-64 bg-white shadow-lg h-full transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+        className={`fixed top-0 left-0 z-40 w-64 bg-white border border-black shadow-lg text-gray-800 h-full overflow-y-auto transition-transform duration-300
+        ${isOpen ? "fixed translate-x-0" : "fixed -translate-x-full"}`}
       >
-        <div className="p-4 border-b">
-          <Link to='/'><img src={Logo} alt="BuildNest" /></Link>
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-sm z-20"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
+        <div className="p-4 border-b z-40 relative">
+          <Link to="/">
+            <img
+              src={Logo}
+              alt="BuildNest"
+              className="h-10 mx-auto"
+            />
+          </Link>
         </div>
 
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 z-40 relative">
+
           <NavLink
-            to="/dashboard"
+            to="/dashboard/my-profile"
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-2 rounded hover:bg-base-300 ${
                 isActive ? "bg-base-300 font-semibold" : ""
               }`
             }
           >
-            Dashboard Home
+            My Profile
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/announcements"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded hover:bg-base-300 ${
+                isActive ? "bg-base-300 font-semibold" : ""
+              }`
+            }
+          >
+            Announcements
           </NavLink>
 
           <NavLink
             to="/dashboard/my-apartment"
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-2 rounded hover:bg-base-300 ${
                 isActive ? "bg-base-300 font-semibold" : ""
@@ -51,6 +81,7 @@ const DashboardLayout = () => {
 
           <NavLink
             to="/dashboard/manage-users"
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-2 rounded hover:bg-base-300 ${
                 isActive ? "bg-base-300 font-semibold" : ""
@@ -63,6 +94,7 @@ const DashboardLayout = () => {
           {/* ✅ New: Manage Coupons link */}
           <NavLink
             to="/dashboard/manage-coupons"
+            onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-2 rounded hover:bg-base-300 ${
                 isActive ? "bg-base-300 font-semibold" : ""
@@ -84,15 +116,15 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <div className="bg-white px-4 py-3 border-b shadow flex items-center justify-between lg:hidden">
-          <button onClick={toggleSidebar} className="text-2xl text-primary">
+        <div className="bg-white px-4 py-6 border-b shadow flex items-center justify-between">
+          <button onClick={toggleSidebar} className="text-2xl text-primary cursor-pointer">
             <FiMenu />
           </button>
-          <span className="text-sm font-medium">{user?.email}</span>
+          <span className="text-sm font-medium">{user?.displayName}</span>
         </div>
 
         {/* Page Content */}
-        <main className="p-6">
+        <main className="px-4 py-6 sm:px-6 lg:px-8 transition-all duration-300">
           <Outlet />
         </main>
       </div>

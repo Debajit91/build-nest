@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
@@ -20,6 +20,8 @@ const Register = () => {
   const [uploading, setUploading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -113,7 +115,7 @@ const Register = () => {
         timer: 1500,
       });
 
-      navigate("/dashboard");
+      navigate(from, {replace: true});
     } catch (err) {
       toast.error(err.message);
     } finally {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
@@ -9,6 +9,9 @@ import saveUser from "../api/saveUser";
 const GoogleSignIn = () => {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleGoogleLogin = async () => {
     try {
@@ -30,7 +33,7 @@ const GoogleSignIn = () => {
         showConfirmButton: false,
       });
 
-      navigate("/dashboard");
+      navigate(from, {replace: true});
     } catch (error) {
       toast.error("Google Sign-In Failed: " + error.message);
     }

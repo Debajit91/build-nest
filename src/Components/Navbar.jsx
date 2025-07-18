@@ -4,6 +4,7 @@ import { FaSignInAlt } from "react-icons/fa";
 // import useAuth from "../hooks/useAuth"; // Your custom hook for auth
 import Logo from '/Logo.png';
 import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,7 +13,8 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/login");
+      toast.success("Logged out successfully!");
+      navigate("/");
     } catch (error) {
       console.error("Logout failed", error);
     }
