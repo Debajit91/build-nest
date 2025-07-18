@@ -14,6 +14,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import "leaflet/dist/leaflet.css";
 import AuthProvider from './Contexts/AuthContext/AuthProvider.jsx';
 import { Toaster } from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,8 @@ AOS.init({
   duration: 1000,
   once: true,
 });
+
+export const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 
 
