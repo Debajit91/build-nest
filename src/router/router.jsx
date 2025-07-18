@@ -10,6 +10,9 @@ import PrivateRoute from "../Routes/PrivateRoute";
 import Apartments from "../Pages/Apartments";
 import MyProfile from "../Pages/MyProfile";
 import Announcements from "../Pages/Announcements";
+import MakePayment from "../Pages/MakePayment";
+import PaymentHistory from "../Pages/PaymentHistory";
+import MemberRoute from "../Components/MemberRoute";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +62,16 @@ export const router = createBrowserRouter([
       {
         path: "announcements",
         Component: Announcements,
+      },
+      {
+        path: "make-payment",
+        // element: <MemberRoute><MakePayment/></MemberRoute>
+        Component: MakePayment
+      },
+      {
+        path: "payment-history",
+        // element: <MemberRoute><PaymentHistory/></MemberRoute>
+        Component: PaymentHistory
       },
       {
         path: "manage-coupons",

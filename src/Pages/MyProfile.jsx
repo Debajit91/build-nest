@@ -1,8 +1,22 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
+import useUserRole from "../Hooks/useUserRole";
+import axiosInstance from "../api/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
 
 const MyProfile = () => {
-    const {user} = useAuth();
+  const { user } = useAuth();
+  const { role } = useUserRole();
+
+  const { data: agreement, isLoading } = useQuery({
+    queryKey: ["agreement", user?.email],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/agreements/${user.email}`);
+      return res.data.agreement;
+    },
+    enabled: !!user?.email && role === "member",
+  });
+
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white shadow rounded-lg text-gray-800">
       <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
@@ -16,25 +30,44 @@ const MyProfile = () => {
         <div>
           <h3 className="text-xl font-medium">{user?.displayName || "N/A"}</h3>
           <p>{user?.email || "N/A"}</p>
+          <p className="text-sm text-gray-500">Role: {role}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <p className="font-semibold">Agreement Accepted On:</p>
-          <p className="text-gray-600">None</p>
+          <p className="text-gray-600">
+            {role === "member" && !isLoading
+              ? agreement?.date
+                ? new Date(agreement.date).toLocaleDateString()
+                : "None"
+              : "None"}
+          </p>
         </div>
         <div>
           <p className="font-semibold">Floor:</p>
-          <p className="text-gray-600">None</p>
+          <p className="text-gray-600">
+            {role === "member" && !isLoading
+              ? agreement?.floor || "None"
+              : "None"}
+          </p>
         </div>
         <div>
           <p className="font-semibold">Block:</p>
-          <p className="text-gray-600">None</p>
+          <p className="text-gray-600">
+            {role === "member" && !isLoading
+              ? agreement?.block || "None"
+              : "None"}
+          </p>
         </div>
         <div>
           <p className="font-semibold">Room Number:</p>
-          <p className="text-gray-600">None</p>
+          <p className="text-gray-600">
+            {role === "member" && !isLoading
+              ? agreement?.roomNo || "None"
+              : "None"}
+          </p>
         </div>
       </div>
     </div>

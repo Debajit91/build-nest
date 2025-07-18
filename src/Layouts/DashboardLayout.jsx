@@ -4,9 +4,11 @@ import { FiMenu } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
 import Logo from "/Logo.png";
 import toast from "react-hot-toast";
+import useUserRole from "../Hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
+  // const { role, isLoading } = useUserRole();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -33,16 +35,11 @@ const DashboardLayout = () => {
         )}
         <div className="p-4 border-b z-40 relative">
           <Link to="/">
-            <img
-              src={Logo}
-              alt="BuildNest"
-              className="h-10 mx-auto"
-            />
+            <img src={Logo} alt="BuildNest" className="h-10 mx-auto" />
           </Link>
         </div>
 
         <nav className="p-4 space-y-2 z-40 relative">
-
           <NavLink
             to="/dashboard/my-profile"
             onClick={() => setIsOpen(false)}
@@ -66,6 +63,34 @@ const DashboardLayout = () => {
           >
             Announcements
           </NavLink>
+
+          {/* {role === "member" && (
+            <> */}
+              <NavLink
+                to="/dashboard/make-payment"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Make Payment
+              </NavLink>
+
+              <NavLink
+                to="/dashboard/payment-history"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Payment History
+              </NavLink>
+            {/* </>
+          )} */}
 
           <NavLink
             to="/dashboard/my-apartment"
@@ -117,7 +142,10 @@ const DashboardLayout = () => {
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
         <div className="bg-white px-4 py-6 border-b shadow flex items-center justify-between">
-          <button onClick={toggleSidebar} className="text-2xl text-primary cursor-pointer">
+          <button
+            onClick={toggleSidebar}
+            className="text-2xl text-primary cursor-pointer"
+          >
             <FiMenu />
           </button>
           <span className="text-sm font-medium">{user?.displayName}</span>
