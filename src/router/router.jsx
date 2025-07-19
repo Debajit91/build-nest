@@ -13,6 +13,7 @@ import Announcements from "../Pages/Announcements";
 import MakePayment from "../Pages/MakePayment";
 import PaymentHistory from "../Pages/PaymentHistory";
 import MemberRoute from "../Components/MemberRoute";
+import MakeAnnouncement from "../Pages/MakeAnnouncement";
 
 
 
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
         path: "payment-history",
         // element: <MemberRoute><PaymentHistory/></MemberRoute>
         Component: PaymentHistory
+      },
+      {
+        path: "make-announcement",
+        Component: MakeAnnouncement
       },
       {
         path: "manage-coupons",

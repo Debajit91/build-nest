@@ -4,7 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
 import Logo from "/Logo.png";
 import toast from "react-hot-toast";
-import useUserRole from "../Hooks/useUserRole";
+// import useUserRole from "../Hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
@@ -105,7 +105,7 @@ const DashboardLayout = () => {
           </NavLink>
 
           <NavLink
-            to="/dashboard/manage-users"
+            to="/dashboard/manage-members"
             onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `block px-4 py-2 rounded hover:bg-base-300 ${
@@ -113,7 +113,19 @@ const DashboardLayout = () => {
               }`
             }
           >
-            Manage Users
+            Manage Members
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/make-announcement"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded hover:bg-base-300 ${
+                isActive ? "bg-base-300 font-semibold" : ""
+              }`
+            }
+          >
+            Make Announcement
           </NavLink>
 
           {/* ✅ New: Manage Coupons link */}
