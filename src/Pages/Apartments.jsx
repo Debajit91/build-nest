@@ -23,21 +23,13 @@ const Apartments = () => {
     queryKey: ["apartments", page, minRent, maxRent],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `http://localhost:5000/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}`
+        `http://localhost:5000/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}&email=${user?.email}`
       );
       return res.data;
     },
     enabled: !hasSearched,
     keepPreviousData: true, // smoother pagination
   });
-
-  {
-    isLoading && (
-      <div className="flex justify-center items-center h-40">
-        <span className="loading loading-spinner text-blue-500"></span>
-      </div>
-    );
-  }
 
   const handleAgreement = async (apt) => {
     if (!user) {
@@ -108,6 +100,13 @@ const Apartments = () => {
         </button>
       </div>
 
+      {isLoading && (
+        <div className="flex justify-center items-center h-40">
+          <span className="loading loading-spinner text-blue-500"></span>
+        </div>
+      )}
+
+      
       {/* 🏘️ Apartments List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data?.apartments?.map((apt) => (
@@ -132,25 +131,32 @@ const Apartments = () => {
               </p>
               <p>
                 <strong>Status:</strong>{" "}
-                {apt.hasAgreement ? (
-                  <span className="text-green-600 font-semibold">
-                    Agreement Done
-                  </span>
-                ) : (
-                  <span className="text-red-600 font-semibold">
-                    Agreement Pending Yet
-                  </span>
-                )}
+                <span
+                  className={`font-semibold ${
+                    apt.statusLabel === "Agreement Done"
+                      ? "text-green-600"
+                      : apt.statusLabel === "Agreement Pending Yet"
+                      ? "text-orange-500"
+                      : "text-blue-600"
+                  }`}
+                >
+                  {apt.statusLabel}
+                </span>
               </p>
+
               <div className="card-actions justify-end">
                 <button
                   onClick={() => handleAgreement(apt)}
                   className={`btn btn-primary ${
-                    apt.hasAgreement ? "opacity-50 cursor-not-allowed" : ""
+                    apt.statusLabel !== "Ready for Agreement"
+                      ? "opacity-50 cursor-not-allowed"
+                      : ""
                   }`}
-                  disabled={apt.hasAgreement}
+                  disabled={apt.statusLabel !== "Ready for Agreement"}
                 >
-                  {apt.hasAgreement ? "Agreement Done" : "Make Agreement"}
+                  {apt.statusLabel !== "Ready for Agreement"
+                    ? apt.statusLabel
+                    : "Make Agreement"}
                 </button>
               </div>
             </div>

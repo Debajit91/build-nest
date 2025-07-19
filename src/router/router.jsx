@@ -12,8 +12,11 @@ import MyProfile from "../Pages/MyProfile";
 import Announcements from "../Pages/Announcements";
 import MakePayment from "../Pages/MakePayment";
 import PaymentHistory from "../Pages/PaymentHistory";
-import MemberRoute from "../Components/MemberRoute";
+import MemberRoute from "../Routes/MemberRoute";
 import MakeAnnouncement from "../Pages/MakeAnnouncement";
+import AgreementRequests from "../Pages/AgreementRequest";
+import AdminRoute from "../Routes/AdminRoute";
+import ManageMembers from "../Pages/ManageMembers";
 
 
 
@@ -68,21 +71,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "make-payment",
-        // element: <MemberRoute><MakePayment/></MemberRoute>
-        Component: MakePayment
+        element: <MemberRoute><MakePayment/></MemberRoute>
       },
       {
         path: "payment-history",
-        // element: <MemberRoute><PaymentHistory/></MemberRoute>
-        Component: PaymentHistory
+        element: <MemberRoute><PaymentHistory/></MemberRoute>
       },
       {
         path: "make-announcement",
-        Component: MakeAnnouncement
+        element: <AdminRoute><MakeAnnouncement/></AdminRoute>
+      },
+      {
+        path: "agreement-requests",
+        element: <AdminRoute><AgreementRequests/></AdminRoute>
+      },
+      {
+        path: "manage-members",
+        element: <AdminRoute><ManageMembers/></AdminRoute>
       },
       {
         path: "manage-coupons",
-        Component: ManageCoupons,
+        element: <AdminRoute><ManageCoupons/></AdminRoute>
       },
     ],
   },

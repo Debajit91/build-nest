@@ -4,7 +4,7 @@ import useUserRole from "../Hooks/useUserRole";
 
 const MemberRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const { role, isLoading } = useUserRole(); // Adjust hook if needed
+  const { role, isLoading } = useUserRole(); 
 
   if (loading || isLoading) return <div>Loading...</div>;
 

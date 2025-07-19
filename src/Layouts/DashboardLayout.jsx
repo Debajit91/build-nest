@@ -4,11 +4,11 @@ import { FiMenu } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
 import Logo from "/Logo.png";
 import toast from "react-hot-toast";
-// import useUserRole from "../Hooks/useUserRole";
+import useUserRole from "../Hooks/useUserRole";
 
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
-  // const { role, isLoading } = useUserRole();
+  const { role, isLoading } = useUserRole();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -64,8 +64,8 @@ const DashboardLayout = () => {
             Announcements
           </NavLink>
 
-          {/* {role === "member" && (
-            <> */}
+          {role === "member" && (
+            <>
               <NavLink
                 to="/dashboard/make-payment"
                 onClick={() => setIsOpen(false)}
@@ -89,57 +89,60 @@ const DashboardLayout = () => {
               >
                 Payment History
               </NavLink>
-            {/* </>
-          )} */}
+            </>
+          )}
 
-          <NavLink
-            to="/dashboard/my-apartment"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 ${
-                isActive ? "bg-base-300 font-semibold" : ""
-              }`
-            }
-          >
-            My Apartment
-          </NavLink>
+          {role === "admin" && (
+            <>
+              <NavLink
+                to="/dashboard/manage-members"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Manage Members
+              </NavLink>
 
-          <NavLink
-            to="/dashboard/manage-members"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 ${
-                isActive ? "bg-base-300 font-semibold" : ""
-              }`
-            }
-          >
-            Manage Members
-          </NavLink>
+              <NavLink
+                to="/dashboard/make-announcement"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Make Announcement
+              </NavLink>
 
-          <NavLink
-            to="/dashboard/make-announcement"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 ${
-                isActive ? "bg-base-300 font-semibold" : ""
-              }`
-            }
-          >
-            Make Announcement
-          </NavLink>
+              <NavLink
+                to="/dashboard/agreement-requests"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Agreement Requests
+              </NavLink>
 
-          {/* ✅ New: Manage Coupons link */}
-          <NavLink
-            to="/dashboard/manage-coupons"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 ${
-                isActive ? "bg-base-300 font-semibold" : ""
-              }`
-            }
-          >
-            Manage Coupons
-          </NavLink>
+              <NavLink
+                to="/dashboard/manage-coupons"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-2 rounded hover:bg-base-300 ${
+                    isActive ? "bg-base-300 font-semibold" : ""
+                  }`
+                }
+              >
+                Manage Coupons
+              </NavLink>
+            </>
+          )}
 
           <button
             onClick={handleSignOut}

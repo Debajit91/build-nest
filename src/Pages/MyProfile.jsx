@@ -8,7 +8,7 @@ const MyProfile = () => {
   const { user } = useAuth();
   const { role } = useUserRole();
 
-  // Fetch member agreement info, only if user is member and user email exists
+  // ✅ Agreement info only for members
   const {
     data: agreement,
     isLoading: isAgreementLoading,
@@ -19,37 +19,19 @@ const MyProfile = () => {
       const res = await axiosInstance.get(`/agreements/${user.email}`);
       return res.data.agreement;
     },
-    enabled: !!user?.email && role === "member",
+    enabled: !!user?.email && role === "member", // only fetch if email exists and role is member
   });
 
-  // Determine if we can show agreement info
-  const showAgreementData =
-    role === "member" && !isAgreementLoading && !isAgreementError;
-
-  // Format agreement accepted date if valid
-  const agreementDate =
-    showAgreementData && agreement?.date
-      ? new Date(agreement.date).toLocaleDateString()
-      : "None";
-
-  // Fetch admin dashboard stats only if role is admin
-  const {
-    data: adminStats,
-    isLoading: isStatsLoading,
-    isError: isStatsError,
-  } = useQuery({
-    queryKey: ["adminStats"],
-    queryFn: async () => {
-      const res = await axiosInstance.get("/admin/stats");
-      return res.data;
-    },
-    enabled: role === "admin",
-  });
+  // ✅ Format date nicely or fallback
+  const agreementDate = agreement?.acceptedAt
+    ? new Date(agreement.acceptedAt).toLocaleDateString()
+    : "None";
 
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white shadow rounded-lg text-gray-800">
       <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
 
+      {/* User Info */}
       <div className="flex items-center gap-4 mb-6">
         <img
           src={user?.photoURL || "/default-user.png"}
@@ -63,62 +45,89 @@ const MyProfile = () => {
         </div>
       </div>
 
-      {/* Agreement Info for members */}
-      {role === "member" && (
+      {/* Agreement Info shown to all, only fetched for members */}
+      {role !== "admin" && (
         <>
-          {isAgreementError && (
+          {role === "member" && isAgreementError && (
             <p className="text-red-500 mb-4">Failed to load agreement info.</p>
           )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="font-semibold">Agreement Accepted On:</p>
               <p className="text-gray-600">
-                {isAgreementLoading ? "Loading..." : agreementDate}
+                {role === "member"
+                  ? isAgreementLoading
+                    ? "Loading..."
+                    : agreementDate
+                  : "None"}
               </p>
             </div>
             <div>
               <p className="font-semibold">Floor:</p>
               <p className="text-gray-600">
-                {showAgreementData ? agreement?.floor || "None" : "None"}
+                {role === "member"
+                  ? isAgreementLoading
+                    ? "Loading..."
+                    : agreement?.floor || "None"
+                  : "None"}
               </p>
             </div>
             <div>
               <p className="font-semibold">Block:</p>
               <p className="text-gray-600">
-                {showAgreementData ? agreement?.block || "None" : "None"}
+                {role === "member"
+                  ? isAgreementLoading
+                    ? "Loading..."
+                    : agreement?.block || "None"
+                  : "None"}
               </p>
             </div>
             <div>
               <p className="font-semibold">Room Number:</p>
               <p className="text-gray-600">
-                {showAgreementData ? agreement?.roomNo || "None" : "None"}
+                {role === "member"
+                  ? isAgreementLoading
+                    ? "Loading..."
+                    : agreement?.apartmentNo || "None"
+                  : "None"}
               </p>
             </div>
           </div>
         </>
       )}
 
-      {/* Admin Stats */}
-      {role === "admin" && (
-        <>
-          {isStatsError && (
-            <p className="text-red-500 mb-4">Failed to load admin stats.</p>
-          )}
-          {!isStatsLoading && adminStats && (
-            <div className="mt-6 bg-gray-100 p-4 rounded">
-              <h3 className="text-lg font-semibold mb-4">
-                Admin Dashboard Stats
-              </h3>
-              <p>Total Rooms: {adminStats.totalRooms}</p>
-              <p>Available Rooms: {adminStats.availableRoomsPercentage}%</p>
-              <p>Unavailable Rooms: {adminStats.unavailableRoomsPercentage}%</p>
-              <p>Total Users: {adminStats.totalUsers}</p>
-              <p>Total Members: {adminStats.totalMembers}</p>
-            </div>
-          )}
-          {isStatsLoading && <p>Loading admin stats...</p>}
-        </>
-      )}
+      {/* Admin-specific Stats */}
+      {role === "admin" && <AdminStats />}
+    </div>
+  );
+};
+
+// 🟢 Admin stats component (split for clarity)
+const AdminStats = () => {
+  const {
+    data: stats,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["adminStats"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/admin/stats");
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <p>Loading admin stats...</p>;
+  if (isError) return <p className="text-red-500">Failed to load stats.</p>;
+
+  return (
+    <div className="mt-6 bg-gray-100 p-4 rounded">
+      <h3 className="text-lg font-semibold mb-4">Admin Dashboard Stats</h3>
+      <p>Total Rooms: {stats.totalRooms}</p>
+      <p>Available Rooms: {stats.availableRoomsPercentage}%</p>
+      <p>Unavailable Rooms: {stats.unavailableRoomsPercentage}%</p>
+      <p>Total Users: {stats.totalUsers}</p>
+      <p>Total Members: {stats.totalMembers}</p>
     </div>
   );
 };
