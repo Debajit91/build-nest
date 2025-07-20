@@ -19,6 +19,7 @@ import AdminRoute from "../Routes/AdminRoute";
 import ManageMembers from "../Pages/ManageMembers";
 import StripeWrapper from "../Pages/StripeWrapper";
 import PaymentSuccess from "../Pages/PaymentSuccess";
+import Unauthorized from "../Pages/Unauthorized";
 
 
 
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         path: "apartments",
         Component: Apartments,
       },
+      {
+        path: "unauthorized",
+        Component: Unauthorized
+      }
     ],
   },
   {

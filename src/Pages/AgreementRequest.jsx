@@ -4,7 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 
 const AgreementRequests = () => {
   const [requests, setRequests] = useState([]);
-  console.log(requests);
+  
 
   useEffect(() => {
     axiosInstance

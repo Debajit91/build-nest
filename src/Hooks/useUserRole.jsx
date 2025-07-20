@@ -15,7 +15,7 @@ const useUserRole = () => {
 
     setIsLoading(true);
 
-    fetch(`http://localhost:5000/users/role/${user.email}`)
+    fetch(`https://buildnestserver.vercel.app/users/role/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setRole(data?.role);

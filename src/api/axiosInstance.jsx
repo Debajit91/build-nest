@@ -3,7 +3,7 @@ import { auth } from "../Firebase/Firebase.init";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://buildnestserver.vercel.app",
 });
 
 let currentToken = null;

@@ -5,7 +5,7 @@ import { FaTag } from "react-icons/fa";
 const CouponShowcase = () => {
   const { coupons, isLoading } = useCoupons();
 
-  console.log("Coupons:", coupons);
+ 
 
   if (isLoading) return <p className="text-center my-10">Loading Coupons...</p>;
 

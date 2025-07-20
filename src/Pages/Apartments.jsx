@@ -23,7 +23,7 @@ const Apartments = () => {
     queryKey: ["apartments", page, minRent, maxRent],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `http://localhost:5000/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}&email=${user?.email}`
+        `https://buildnestserver.vercel.app/apartments?page=${page}&limit=6&minRent=${minRent}&maxRent=${maxRent}&email=${user?.email}`
       );
       return res.data;
     },
@@ -46,7 +46,7 @@ const Apartments = () => {
     };
     try {
       const res = await axiosInstance.post(
-        "http://localhost:5000/agreements",
+        "https://buildnestserver.vercel.app/agreements",
         agreementData
       );
 
