@@ -1,148 +1,151 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../api/axiosInstance";
 import useAuth from "../Hooks/useAuth";
-
+import axiosInstance from "../api/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const MakePayment = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
   const [month, setMonth] = useState("");
-  const [couponCode, setCouponCode] = useState("");
+  const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
-  const [couponError, setCouponError] = useState("");
+  const [isApplying, setIsApplying] = useState(false);
 
-  // ✅ fetch member agreement info from DB
   const { data: agreement, isLoading } = useQuery({
     queryKey: ["agreementInfo", user?.email],
-    queryFn: async () => {
-      const res = await axiosInstance.get(`/agreements/${user?.email}`);
-      return res.data;
-    },
     enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/agreements/${user.email}`);
+      return res.data.agreement;
+    },
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!agreement) return <p>You are not an active member.</p>;
-
-  const handleCouponApply = async () => {
+  const handleApplyCoupon = async () => {
+    if (!coupon) return toast.error("Enter a coupon code");
     try {
-      const res = await axiosInstance.post("/validate-coupon", {
-        code: couponCode,
+      setIsApplying(true);
+      const res = await axiosInstance.post("/coupons/validate-coupon", {
+        code: coupon,
       });
-
-      if (res.data.valid) {
-        setDiscount(res.data.discount); // e.g., 10 means 10%
-        setCouponError("");
-      } else {
-        setDiscount(0);
-        setCouponError("Invalid or expired coupon.");
-      }
-    } catch (err) {
-      setCouponError("Error validating coupon.");
+      setDiscount(res.data.discount);
+      toast.success(`🎉 Coupon applied! ${res.data.discount}% off`);
+    } catch {
+      toast.error("❌ Invalid coupon");
+      setDiscount(0);
+    } finally {
+      setIsApplying(false);
     }
   };
 
-  const handlePay = () => {
-    const rent = agreement.rent;
-    const discountedRent = rent - rent * (discount / 100);
+  const handlePay = async () => {
+    if (!month) return toast.error("Please select a month");
 
-    navigate("/checkout", {
-      state: {
-        member: {
-          email: user.email,
-          floor: agreement.floor,
-          block: agreement.block,
-          room: agreement.room,
+    const discountedAmount = agreement.rent - (agreement.rent * discount) / 100;
+
+    try {
+      const res = await axiosInstance.post("/payments/create-payment-intent", {
+        amount: discountedAmount * 100,
+      });
+
+      navigate("/dashboard/checkout", {
+        state: {
+          clientSecret: res.data.clientSecret,
+          agreement,
+          month,
+          coupon,
+          discount,
+          discountedAmount,
+          originalRent: agreement.rent,
         },
-        month,
-        rent: discountedRent,
-        originalRent: rent,
-        coupon: couponCode || null,
-        discount,
-      },
-    });
+      });
+    } catch (err) {
+      console.error("Failed to create payment intent:", err);
+      toast.error("Failed to initiate payment");
+    }
   };
 
+  if (isLoading) return <p>Loading...</p>;
+  if (!agreement) return <p>No agreement found for this user.</p>;
+
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded">
-      <h2 className="text-2xl font-semibold mb-4">Make Payment</h2>
+    <div className="max-w-md mx-auto mt-10 p-6 border shadow rounded space-y-4">
+      <h2 className="text-2xl font-semibold mb-4">Make a Payment</h2>
 
-      <div className="space-y-3">
-        <div>
-          <label>Email:</label>
-          <input readOnly value={user.email} className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Floor:</label>
-          <input readOnly value={agreement.floor} className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Block:</label>
-          <input readOnly value={agreement.block} className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Room:</label>
-          <input readOnly value={agreement.room} className="input input-bordered w-full" />
-        </div>
-        <div>
-          <label>Rent:</label>
-          <input readOnly value={`৳ ${agreement.rent}`} className="input input-bordered w-full" />
-        </div>
+      <div>
+        <strong>Email:</strong> {agreement.email}
+      </div>
+      <div>
+        <strong>Floor:</strong> {agreement.floor}
+      </div>
+      <div>
+        <strong>Block Name:</strong> {agreement.block}
+      </div>
+      <div>
+        <strong>Room/Apartment:</strong> {agreement.apartmentNo}
+      </div>
+      <div>
+        <strong>Rent:</strong> ${agreement.rent}
+      </div>
 
-        <div>
-          <label>Month:</label>
-          <select
-            className="select select-bordered w-full"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-          >
-            <option value="">Select Month</option>
-            {[
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
-            ].map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex gap-2 items-end">
-          <input
-            placeholder="Enter coupon code"
-            value={couponCode}
-            onChange={(e) => setCouponCode(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          <button onClick={handleCouponApply} className="btn btn-outline btn-sm">
-            Apply
-          </button>
-        </div>
-        {discount > 0 && <p className="text-green-600">Coupon applied: {discount}% off</p>}
-        {couponError && <p className="text-red-500">{couponError}</p>}
-
-        <button
-          onClick={handlePay}
-          disabled={!month}
-          className="btn btn-primary w-full mt-4"
+      <label className="block">
+        Month:
+        <select
+          className="w-full border p-2 mt-1"
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
         >
-          Pay Now
+          <option value="">Select month</option>
+          {[
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ].map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          className="border p-2 flex-1"
+          placeholder="Enter coupon code"
+          value={coupon}
+          onChange={(e) => setCoupon(e.target.value)}
+        />
+        <button
+          onClick={handleApplyCoupon}
+          disabled={isApplying}
+          className="btn btn-sm"
+        >
+          {isApplying ? "Applying..." : "Apply"}
         </button>
       </div>
+
+      {discount > 0 && (
+        <div className="text-green-600">
+          Coupon applied! {discount}% discount 🎉
+          <br />
+          You’ll pay: ${agreement.rent - (agreement.rent * discount) / 100}
+        </div>
+      )}
+
+      <button onClick={handlePay} className="btn btn-primary w-full mt-4">
+        Pay
+      </button>
     </div>
   );
 };

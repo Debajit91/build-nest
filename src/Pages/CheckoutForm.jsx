@@ -1,29 +1,27 @@
-import React, { useState } from "react";
-import {
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useLocation, useNavigate } from "react-router";
+import {  useState } from "react";
+import useAuth from "../Hooks/useAuth";
 import axiosInstance from "../api/axiosInstance";
-
+import toast from "react-hot-toast";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const { user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { clientSecret, agreement, month, coupon, discount } =
+    location.state || {};
+
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
-  const amount = 5000; // = 50.00 BDT (Stripe uses paisa/cent unit)
-  const memberInfo = {
-    name: "Member Name",
-    email: "email@example.com",
-    floor: "3rd",
-    block: "A",
-    room: "305",
-    month: "July",
-  };
+  const originalRent = agreement?.rent;
+  const rent = originalRent - (originalRent * discount) / 100;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,71 +35,78 @@ const CheckoutForm = () => {
     if (!card) return;
 
     try {
-      // 1. Create payment intent from backend
-      const res = await axiosInstance.post("/create-payment-intent", { amount });
-      const clientSecret = res.data.clientSecret;
-
-      // 2. Confirm the payment
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card,
-          billing_details: {
-            name: memberInfo.name,
-            email: memberInfo.email,
+      const { paymentIntent, error: stripeError } =
+        await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card,
+            billing_details: {
+              name: user?.name,
+              email: user?.email,
+            },
           },
-        },
-      });
-
-      if (result.error) {
-        setError(result.error.message);
-      } else if (result.paymentIntent.status === "succeeded") {
-        setSuccess("Payment successful!");
-        setTransactionId(result.paymentIntent.id);
-
-        // 3. Save to DB
-        await axiosInstance.post("/payments", {
-          ...memberInfo,
-          amount,
-          transactionId: result.paymentIntent.id,
-          date: new Date(),
         });
+
+      if (stripeError) {
+        setError(stripeError.message);
+        return;
+      }
+
+      if (paymentIntent.status === "succeeded") {
+        const txId = paymentIntent.id;
+        setTransactionId(txId);
+
+        // Save to DB
+        try {
+          await axiosInstance.post("/payments", {
+            userId: agreement.userId || agreement._id,
+            transactionId: txId,
+            date: new Date().toISOString(),
+            originalRent,
+            discountedRent: rent,
+            coupon,
+            discount,
+            month,
+            apartment: agreement,
+          });
+
+          toast.success("Payment completed and saved successfully! 🎉");
+          setSuccess("Payment successful!");
+          navigate("/dashboard/payment-success", {
+            state: { transactionId: txId },
+          });
+        } catch (saveErr) {
+          console.error("DB Save Error:", saveErr);
+          setError("Payment succeeded but failed to save info.");
+        }
       }
     } catch (err) {
-      setError("Something went wrong!");
+      console.error("Stripe Error:", err);
+      setError("Something went wrong with payment.");
     } finally {
       setProcessing(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <CardElement
-        className="border p-3 rounded"
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#333",
-              "::placeholder": { color: "#999" },
-            },
-            invalid: { color: "#e5424d" },
-          },
-        }}
-      />
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto mt-10 p-4 border shadow rounded"
+    >
+      <CardElement className="border p-3 rounded" />
       <button
         type="submit"
-        disabled={!stripe || !elements || processing}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        disabled={!stripe || processing}
+        className="btn btn-primary mt-4 w-full"
       >
-        {processing ? "Processing..." : "Pay"}
+        {processing ? "Processing..." : "Confirm Payment"}
       </button>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
       {success && (
-        <div className="text-green-600">
-          <p>{success}</p>
-          <p>Transaction ID: {transactionId}</p>
-        </div>
+        <p className="text-green-600 mt-2">
+          ✅ {success} <br />
+          Transaction ID: {transactionId}
+        </p>
       )}
     </form>
   );

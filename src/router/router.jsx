@@ -17,6 +17,8 @@ import MakeAnnouncement from "../Pages/MakeAnnouncement";
 import AgreementRequests from "../Pages/AgreementRequest";
 import AdminRoute from "../Routes/AdminRoute";
 import ManageMembers from "../Pages/ManageMembers";
+import StripeWrapper from "../Pages/StripeWrapper";
+import PaymentSuccess from "../Pages/PaymentSuccess";
 
 
 
@@ -72,6 +74,14 @@ export const router = createBrowserRouter([
       {
         path: "make-payment",
         element: <MemberRoute><MakePayment/></MemberRoute>
+      },
+      {
+        path: "checkout",
+        element: <StripeWrapper/>
+      },
+      {
+        path: "payment-success",
+        element: <MemberRoute><PaymentSuccess/></MemberRoute>
       },
       {
         path: "payment-history",
