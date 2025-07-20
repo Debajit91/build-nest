@@ -5,7 +5,7 @@ const Unauthorized = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4 text-center">
       <img
-        src="https://illustrations.popsy.co/gray/web-security.svg"
+        src="https://i.ibb.co/Y4cV7Nkd/18240812.png"
         alt="Unauthorized access"
         className="w-80 mb-8"
       />
