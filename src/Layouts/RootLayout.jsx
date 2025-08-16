@@ -6,10 +6,10 @@ import { Outlet } from "react-router";
 
 const RootLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-base-50 text-gray-800 max-w-7xl mx-auto">
+    <div className="min-h-screen flex flex-col text-gray-800 max-w-7xl mx-auto">
       <Navbar />
       
-      <main className="flex-1 container mx-auto px-4 py-6 border-2 border-gray-200">
+      <main className="flex-1 container mx-auto px-4 py-6">
         <Outlet />
       </main>
 

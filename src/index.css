@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@config {
-  darkMode: "class";
+@plugin "daisyui" {
+  themes: light --default,  retro;
 }
-@plugin "daisyui";

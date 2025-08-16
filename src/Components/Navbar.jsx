@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50">
+    <div className="navbar bg-base-200 shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo + Website Name */}
         <Link
@@ -43,12 +43,7 @@ const Navbar = () => {
 
         {/* Right Side: Login or User Profile Dropdown */}
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => document.documentElement.classList.toggle("dark")}
-            className="p-2 border rounded"
-          >
-            Toggle Theme
-          </button>
+
           {!user ? (
             <Link
               to="/login"
