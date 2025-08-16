@@ -32,7 +32,7 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="w-full h-[75vh]">
+    <div className="h-[75vh] my-4">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -47,12 +47,12 @@ const Banner = () => {
               <img
                 src={slide.img}
                 alt={slide.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/70 flex flex-col justify-center items-start px-6 md:px-20 text-slate-200 space-y-4">
-                <h2 className="text-4xl md:text-6xl font-bold drop-shadow-xl">{slide.title}</h2>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/70 flex flex-col justify-center items-start px-6 md:px-20 text-slate-200 space-y-4 rounded-2xl">
+                <h1 className="text-4xl md:text-6xl font-bold drop-shadow-xl">{slide.title}</h1>
                 <p className="text-lg max-w-xl drop-shadow-lg">{slide.text}</p>
-                <Link to={slide.link} className="btn btn-primary">{slide.button}</Link>
+                <Link to={slide.link} className="btn btn-primary slider">{slide.button}</Link>
               </div>
             </div>
           </SwiperSlide>

@@ -11,7 +11,7 @@ const CouponShowcase = () => {
 
   if (!coupons.length) return null;
   return (
-    <section className="px-4 py-10 bg-base-100">
+    <section className="py-10">
       <h2 className="text-3xl font-bold text-center mb-6">
         Available Coupons
       </h2>

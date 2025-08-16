@@ -14,7 +14,7 @@ const customIcon = new L.Icon({
 const LocationMap = () => {
   const position = [22.3419, 91.8361];
   return (
-    <div className="w-full h-[400px] rounded-lg border-1 overflow-hidden shadow-md">
+    <div className="w-full h-[500px] rounded-lg border-1 overflow-hidden shadow-md">
       <MapContainer
         style={{ height: "100%", width: "100%" }}
         center={position}

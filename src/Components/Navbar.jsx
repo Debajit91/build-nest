@@ -47,22 +47,20 @@ const Navbar = () => {
     { to: "/community", label: "Community" },
   ];
 
-  const navLinks = user ? [...publicLinks, ...extraWhenLoggedIn] : publicLinks;
-
   return (
-    <div className="w-full dark:bg-primary bg-base-200 shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <div className="w-full bg-base-200 shadow-md sticky top-0 z-50 shared">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
         {/* Logo + Website Name */}
         <Link
           to="/"
-          className="flex items-center gap-2 text-xl font-bold text-primary"
+          className="flex items-center text-xl font-bold text-primary"
         >
           <img className="w-[200px]" src={Logo} alt="BuildNest" />
         </Link>
 
         {/* Top Level Links */}
-        <div className="flex items-center gap-4">
-          {navLinks.map((link) => (
+        <div className="flex items-center gap-3">
+          {publicLinks.map((link) => (
             <Link key={link.to} to={link.to} className="btn btn-ghost btn-sm">
               {link.label}
             </Link>
@@ -114,6 +112,19 @@ const Navbar = () => {
                     Dashboard
                   </Link>
                 </li>
+                
+                  {extraWhenLoggedIn.map((link) => (
+                    <li>
+                      <Link
+                      key={link.to}
+                      to={link.to}
+                      className="btn w-full text-left btn-sm"
+                    >
+                      {link.label}
+                    </Link>
+                    </li>
+                  ))}
+                
                 <li>
                   <button
                     onClick={handleLogout}

@@ -10,8 +10,8 @@ import Logo from "/Logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 dark:bg-primary mt-10">
-      <div className="footer flex justify-between p-10 container mx-auto">
+    <footer className="bg-base-200 mt-10 shared">
+      <div className="footer flex justify-between py-10 px-4 container max-w-7xl mx-auto">
         {/* Company Info */}
         <div>
           <Link

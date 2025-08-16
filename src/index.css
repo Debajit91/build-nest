@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, night,  retro;
+  themes: light --default, night, retro;
 }
 @plugin "daisyui/theme" {
   name: "retro";
@@ -12,14 +12,17 @@
   .btn:hover {
     background-color: teal;
     border-color: teal;
-    color:aliceblue
+    color: aliceblue;
   }
-}
-[data-theme="retro"] {
+  .slider {
+    background-color: white;
+    border-color: teal;
+    color: black;
+  }
   .social:hover {
     background-color: #793205;
     border-color: #793205;
-    color:aliceblue
+    color: aliceblue;
   }
 }
 
@@ -31,16 +34,29 @@
 }
 
 [data-theme="night"] {
-    h2 {
-        color: #3abdf8;
+    .shared {
+        background-color: #3abdf8;
+        color: black/50;
     }
+  input {
+    color: white;
+  }
+  h2, h3 {
+    color: #3abdf8;
+  }
+  .about {
+    color: #baa9a9;
+  }
+  .apart {
+    color: #3abdf8;
+  }
   .btn:hover {
-    color:aliceblue
+    color: aliceblue;
   }
   .social:hover {
-    color:aliceblue
+    color: aliceblue;
   }
-    .contact {
+  .contact {
     background-color: #3abdf8;
     color: white;
   }
@@ -48,7 +64,8 @@
     background-color: #3abdf8;
     color: black/50;
   }
-  .mission p, ul {
+  .mission p,
+  ul {
     color: white;
   }
   .accordion {

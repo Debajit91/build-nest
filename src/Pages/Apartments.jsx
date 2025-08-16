@@ -110,7 +110,7 @@ const Apartments = () => {
       {/* 🏘️ Apartments List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data?.apartments?.map((apt) => (
-          <div key={apt._id} className="card bg-base-100 shadow-xl">
+          <div key={apt._id} className="card apart bg-base-100 shadow-xl">
             <figure>
               <img
                 src={apt.image}

@@ -2,16 +2,16 @@ import React from "react";
 
 const AboutBuilding = () => {
   return (
-    <section className="bg-base-300 my-10 py-16 px-4 md:px-10 lg:px-20 text-gray-800">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="my-10 py-16  text-gray-800">
+      <div className="text-center">
         <h2
-          className="text-4xl md:text-5xl font-bold mb-6 text-primary"
+          className="text-3xl font-bold mb-6 text-primary"
           data-aos="fade-up"
         >
           About the Building
         </h2>
         <p
-          className="text-lg md:text-xl leading-relaxed text-gray-600 mb-8"
+          className="text-lg md:text-xl leading-relaxed about mb-8"
           data-aos="fade-up"
           data-aos-delay="100"
         >
@@ -23,7 +23,7 @@ const AboutBuilding = () => {
         </p>
 
         <blockquote
-          className="border-l-4 border-primary pl-6 italic text-gray-700 text-lg md:text-xl mb-8"
+          className="border-l-4 border-primary pl-6 italic text-primary text-lg md:text-xl mb-8"
           data-aos="fade-in"
           data-aos-delay="200"
         >
@@ -34,7 +34,7 @@ const AboutBuilding = () => {
         <div className="grid md:grid-cols-2 gap-8 text-left">
           <div data-aos="fade-right">
             <h3 className="text-2xl font-semibold mb-2">Modern Architecture</h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed about">
               The building boasts contemporary design, energy-efficient
               materials, and smart apartment layouts tailored for urban
               families. Large windows, sleek facades, and secure entry points
@@ -43,7 +43,7 @@ const AboutBuilding = () => {
           </div>
           <div data-aos="fade-left">
             <h3 className="text-2xl font-semibold mb-2">Smart Amenities</h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed about">
               Residents enjoy access to a smart parking system, digital notice
               board, automated payment portals, 24/7 security, and responsive
               maintenance — all integrated into the BuildNest platform.

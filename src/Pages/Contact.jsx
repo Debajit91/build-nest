@@ -41,7 +41,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-center md:text-left">
             <h2 className="text-2xl font-semibold text-primary">BuildNest Apartment</h2>
             <p className="text-base-content">60/A Zakir Hossain Road, GEC, <br /> Chittagong, Bangladesh</p>
             <p className="text-base-content">Email: support@buildnest.com</p>

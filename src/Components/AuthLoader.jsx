@@ -1,4 +1,3 @@
-// src/Components/AuthLoader.jsx
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import useAuth from "../Hooks/useAuth";
