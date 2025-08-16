@@ -33,7 +33,7 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
             About BuildNest
           </h1>
-          <p className="text-lg text-base-content leading-relaxed mb-6">
+          <p className="text-lg text-justify text-base-content leading-relaxed mb-6">
             Welcome to <span className="font-semibold">BuildNest</span> — your
             trusted community for modern apartment living. Explore apartments,
             manage bookings, stay updated with announcements, and connect with
