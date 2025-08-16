@@ -45,11 +45,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "contact",
-        Component: Contact
+        element: (
+          <PrivateRoute>
+            <Contact/>
+          </PrivateRoute>
+        )
       },
       {
         path: "community",
-        Component: Community
+        element: (
+          <PrivateRoute>
+            <Community/>
+          </PrivateRoute>
+        )
       },
       {
         path: "unauthorized",

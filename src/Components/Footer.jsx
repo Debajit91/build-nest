@@ -49,34 +49,34 @@ const Footer = () => {
           <span className="footer-title">Follow Us</span>
           <div className="flex gap-4 text-xl">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/dayalu.jps"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary"
+              className="hover:text-[#dbca9b] hover:bg-[#793205]"
             >
               <FaFacebookF />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/Debajit20664278"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary"
+              className="hover:text-[#dbca9b] hover:bg-[#793205]"
             >
               <FaTwitter />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/debajitroy25"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary"
+              className="hover:text-[#dbca9b] hover:bg-[#793205]"
             >
               <FaLinkedinIn />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/dayalu.jps"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary"
+              className="hover:text-[#dbca9b] hover:bg-[#793205]"
             >
               <FaInstagram />
             </a>
