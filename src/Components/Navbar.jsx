@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { FaSignInAlt } from "react-icons/fa";
+import { FaMoon, FaSignInAlt, FaSun } from "react-icons/fa";
 // import useAuth from "../hooks/useAuth"; // Your custom hook for auth
 import Logo from "/Logo.png";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
+  // Initialize theme state from localStorage (default to 'retro' if not set)
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "retro"
+  );
+
+  // Whenever `theme` changes, apply it to <html> and store in localStorage
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme); // Switch DaisyUI theme:contentReference[oaicite:5]{index=5}
+    localStorage.setItem("theme", theme); // Persist theme choice:contentReference[oaicite:6]{index=6}
+  }, [theme]);
+
+  // Toggle between 'retro' (light) and 'night' (dark) themes
+  const handleToggle = () => {
+    setTheme((prevTheme) => (prevTheme === "retro" ? "night" : "retro"));
+  };
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -22,20 +37,20 @@ const Navbar = () => {
 
   // Top-level Links
   const publicLinks = [
-    {to: '/', label: "Home"},
-    {to: '/apartments', label: "Apartments"},
-    {to: '/about', label: "About"},
-  ]
+    { to: "/", label: "Home" },
+    { to: "/apartments", label: "Apartments" },
+    { to: "/about", label: "About" },
+  ];
 
   const extraWhenLoggedIn = [
-    {to: '/contact', label: "Contact"},
-    {to: '/community', label: "Community"},
-  ]
+    { to: "/contact", label: "Contact" },
+    { to: "/community", label: "Community" },
+  ];
 
   const navLinks = user ? [...publicLinks, ...extraWhenLoggedIn] : publicLinks;
 
   return (
-    <div className="w-full bg-base-200 shadow-md sticky top-0 z-50">
+    <div className="w-full dark:bg-primary bg-base-200 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Logo + Website Name */}
         <Link
@@ -47,7 +62,7 @@ const Navbar = () => {
 
         {/* Top Level Links */}
         <div className="flex items-center gap-4">
-          {navLinks.map((link)=>(
+          {navLinks.map((link) => (
             <Link key={link.to} to={link.to} className="btn btn-ghost btn-sm">
               {link.label}
             </Link>
@@ -56,7 +71,18 @@ const Navbar = () => {
 
         {/* Right Side: Login or User Profile Dropdown */}
         <div className="flex items-center gap-4">
-
+          <button
+            onClick={handleToggle}
+            className="btn btn-ghost btn-circle"
+            aria-label="Toggle theme"
+          >
+            {/* Show moon icon when in light mode, sun icon when in dark mode */}
+            {theme === "retro" ? (
+              <FaMoon className="w-5 h-5" /> /* Retro (light) active: offer moon (dark) */
+            ) : (
+              <FaSun className="w-5 h-5" /> /* Night (dark) active: offer sun (light) */
+            )}
+          </button>
           {!user ? (
             <Link
               to="/login"

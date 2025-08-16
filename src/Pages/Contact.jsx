@@ -42,14 +42,14 @@ const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
           {/* Contact Info */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-secondary">BuildNest Apartment</h2>
-            <p>60/A Zakir Hossain Road, GEC, <br /> Chittagong, Bangladesh</p>
-            <p>Email: support@buildnest.com</p>
-            <p>Phone: +1 (555) 123-4567</p>
+            <h2 className="text-2xl font-semibold text-primary">BuildNest Apartment</h2>
+            <p className="text-base-content">60/A Zakir Hossain Road, GEC, <br /> Chittagong, Bangladesh</p>
+            <p className="text-base-content">Email: support@buildnest.com</p>
+            <p className="text-base-content">Phone: +1 (555) 123-4567</p>
           </div>
 
           {/* Contact Form */}
-          <div className="bg-base-100 shadow-lg rounded-xl p-6">
+          <div className="bg-base-100  shadow-lg rounded-xl p-6 contact">
             <form ref={formRef} onSubmit={onSubmit} className="space-y-4">
               <div>
                 <label className="label">
@@ -95,7 +95,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className={`btn btn-primary w-full ${sending ? "btn-disabled" : ""}`}
+                className={`btn btn-outline w-full ${sending ? "btn-disabled" : ""}`}
               >
                 {sending ? "Sending..." : "Send Message"}
               </button>

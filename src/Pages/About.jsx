@@ -55,7 +55,7 @@ const About = () => {
       </div>
 
       {/* Mission & Values */}
-      <div className="max-w-7xl mx-auto px-6 pb-6">
+      <div className="max-w-7xl mx-auto px-6 pb-6 mission">
         <h2 className="text-2xl font-semibold text-secondary mb-4">Our Mission</h2>
         <p className="mb-8">
           BuildNest streamlines life for residents and management. From booking
@@ -80,7 +80,7 @@ const About = () => {
 
         <div className="space-y-3">
           {faqs.map((item, idx) => (
-            <div key={idx} className="collapse collapse-arrow bg-base-100 shadow">
+            <div key={idx} className="collapse collapse-arrow bg-base-100 shadow accordion">
               {/* Use a checkbox to make it an accordion-like toggle */}
               <input type="checkbox" defaultChecked={idx === 0} aria-label={`Toggle ${item.q}`} />
               <div className="collapse-title text-lg font-medium">{item.q}</div>

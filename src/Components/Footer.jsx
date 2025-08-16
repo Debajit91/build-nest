@@ -10,7 +10,7 @@ import Logo from "/Logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 text-base-content mt-10">
+    <footer className="bg-base-200 dark:bg-primary mt-10">
       <div className="footer flex justify-between p-10 container mx-auto">
         {/* Company Info */}
         <div>
@@ -52,7 +52,7 @@ const Footer = () => {
               href="https://www.facebook.com/dayalu.jps"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#dbca9b] hover:bg-[#793205]"
+              className="social"
             >
               <FaFacebookF />
             </a>
@@ -60,7 +60,7 @@ const Footer = () => {
               href="https://x.com/Debajit20664278"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#dbca9b] hover:bg-[#793205]"
+              className="social"
             >
               <FaTwitter />
             </a>
@@ -68,7 +68,7 @@ const Footer = () => {
               href="https://www.linkedin.com/in/debajitroy25"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#dbca9b] hover:bg-[#793205]"
+              className="social"
             >
               <FaLinkedinIn />
             </a>
@@ -76,7 +76,7 @@ const Footer = () => {
               href="https://www.instagram.com/dayalu.jps"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#dbca9b] hover:bg-[#793205]"
+              className="social"
             >
               <FaInstagram />
             </a>

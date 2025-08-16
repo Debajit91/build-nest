@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default,  retro;
+  themes: light --default, night,  retro;
 }
 @plugin "daisyui/theme" {
   name: "retro";
@@ -13,5 +13,45 @@
     background-color: teal;
     border-color: teal;
     color:aliceblue
+  }
+}
+[data-theme="retro"] {
+  .social:hover {
+    background-color: #793205;
+    border-color: #793205;
+    color:aliceblue
+  }
+}
+
+
+@plugin "daisyui/theme" {
+  name: "night";
+  --color-primary: #3abdf8;
+  --color-secondary: black/50;
+}
+
+[data-theme="night"] {
+    h2 {
+        color: #3abdf8;
+    }
+  .btn:hover {
+    color:aliceblue
+  }
+  .social:hover {
+    color:aliceblue
+  }
+    .contact {
+    background-color: #3abdf8;
+    color: white;
+  }
+  .highlight {
+    background-color: #3abdf8;
+    color: black/50;
+  }
+  .mission p, ul {
+    color: white;
+  }
+  .accordion {
+    background-color: #3abdf8;
   }
 }

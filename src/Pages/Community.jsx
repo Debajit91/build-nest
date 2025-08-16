@@ -19,7 +19,7 @@ export default function Community() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/contact" className="btn btn-primary">Contact Us</Link>
-            <Link to="/dashboard" className="btn btn-outline">Open Dashboard</Link>
+            <Link to="/dashboard" className="btn btn-primary">Open Dashboard</Link>
           </div>
         </div>
         <div className="flex justify-center">
@@ -35,7 +35,7 @@ export default function Community() {
       {/* Highlights */}
       <div className="max-w-6xl mx-auto px-6 pb-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {["Events","Notices","Neighbors"].map((h,i)=>(
-          <div key={i} className="card bg-base-100 shadow">
+          <div key={i} className="card bg-base-100 highlight shadow">
             <div className="card-body">
               <h3 className="card-title text-secondary">{h}</h3>
               <p>{h === "Events"
@@ -51,7 +51,7 @@ export default function Community() {
 
       {/* Events & Notices */}
       <div className="max-w-6xl mx-auto px-6 py-8 mb-10">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 mission">
           <h2 className="text-2xl font-semibold text-secondary">Events & Notices</h2>
           {/* <div className="flex gap-2">
             <Link to="/community/post-notice" className="btn btn-sm btn-outline">Post Notice</Link>
@@ -61,7 +61,7 @@ export default function Community() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {events.map((e, i) => (
-            <div key={i} className="card bg-base-100 shadow">
+            <div key={i} className="card bg-base-100 shadow highlight">
               <div className="card-body">
                 <div className="flex items-center justify-between">
                   <span className="badge badge-outline">{e.type}</span>
@@ -87,7 +87,7 @@ export default function Community() {
             ["Keep It Relevant","Announcements for official updates; Events for activities."],
             ["Shared Spaces","Respect quiet hours and keep common areas clean."]
           ].map(([t,c],idx)=>(
-            <div key={idx} className="collapse collapse-arrow bg-base-100 shadow">
+            <div key={idx} className="collapse collapse-arrow bg-base-100 shadow accordion">
               <input type="checkbox" defaultChecked={idx===0} />
               <div className="collapse-title text-lg font-medium">{t}</div>
               <div className="collapse-content"><p>{c}</p></div>
