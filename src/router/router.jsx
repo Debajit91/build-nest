@@ -20,6 +20,8 @@ import ManageMembers from "../Pages/ManageMembers";
 import StripeWrapper from "../Pages/StripeWrapper";
 import PaymentSuccess from "../Pages/PaymentSuccess";
 import Unauthorized from "../Pages/Unauthorized";
+import About from "../Pages/About";
+import Contact from "../Pages/Contact";
 
 
 
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "apartments",
         Component: Apartments,
+      },
+      {
+        path: "about",
+        Component: About
       },
       {
         path: "unauthorized",
@@ -54,6 +60,7 @@ export const router = createBrowserRouter([
         path: "register",
         Component: Register,
       },
+      
     ],
   },
   {
@@ -75,6 +82,10 @@ export const router = createBrowserRouter([
       {
         path: "announcements",
         Component: Announcements,
+      },
+      {
+        path: "contact",
+        Component: Contact
       },
       {
         path: "make-payment",

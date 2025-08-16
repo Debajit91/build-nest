@@ -20,9 +20,23 @@ const Navbar = () => {
     }
   };
 
+  // Top-level Links
+  const publicLinks = [
+    {to: '/', label: "Home"},
+    {to: '/apartments', label: "Apartments"},
+    {to: '/about', label: "About"},
+  ]
+
+  const extraWhenLoggedIn = [
+    {to: '/dashboard/contact', label: "Contact"},
+    {to: '/community', label: "Community"},
+  ]
+
+  const navLinks = user ? [...publicLinks, ...extraWhenLoggedIn] : publicLinks;
+
   return (
-    <div className="navbar bg-base-200 shadow-md sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
+    <div className="w-full bg-base-200 shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Logo + Website Name */}
         <Link
           to="/"
@@ -31,14 +45,13 @@ const Navbar = () => {
           <img className="w-[200px]" src={Logo} alt="BuildNest" />
         </Link>
 
-        {/* Navigation Links */}
+        {/* Top Level Links */}
         <div className="flex items-center gap-4">
-          <Link to="/" className="btn btn-ghost btn-sm">
-            Home
-          </Link>
-          <Link to="/apartments" className="btn btn-ghost btn-sm">
-            Apartments
-          </Link>
+          {navLinks.map((link)=>(
+            <Link key={link.to} to={link.to} className="btn btn-ghost btn-sm">
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         {/* Right Side: Login or User Profile Dropdown */}
