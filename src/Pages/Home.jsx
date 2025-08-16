@@ -8,6 +8,7 @@ import NeighborhoodCommute from '../Components/New Sections/NeighborhoodCommute'
 import Testimonials from '../Components/New Sections/Testimonials';
 import HowItWorks from '../Components/New Sections/HowItWorks';
 import NewFeature from '../Components/New Sections/NewFeature';
+import MoveInGuideSection from '../Components/New Sections/MoveInGuideSection';
 
 const Home = () => {
     return (
@@ -17,10 +18,11 @@ const Home = () => {
             <NewFeature/>
             <CouponShowcase/>
             <Location/>
+            <HowItWorks/>
             <Amenities/>
             <NeighborhoodCommute/>
             <Testimonials/>
-            <HowItWorks/>
+            <MoveInGuideSection/>
         </div>
     );
 };

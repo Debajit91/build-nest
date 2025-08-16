@@ -7,10 +7,10 @@ const HowItWorks = () => {
       <h2 className="text-3xl font-bold text-center mb-6">How It Works</h2>
       <div className="flex flex-col justify-center items-center">
         <ul className="steps steps-vertical lg:steps-horizontal">
-          <li className="step">Browse apartments</li>
-          <li className="step">Create account</li>
-          <li className="step">Book / Apply</li>
-          <li className="step">Move in & manage</li>
+          <li className="step step-info">Browse apartments</li>
+          <li className="step step-info">Create account</li>
+          <li className="step step-info">Book / Apply</li>
+          <li className="step step-info">Move in & manage</li>
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link to="/apartments" className="btn btn-primary">

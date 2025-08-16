@@ -21,10 +21,10 @@ const DashboardLayout = () => {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   return (
-    <div className="min-h-screen flex bg-base-200 text-base-content">
+    <div className="min-h-screen flex text-base-content">
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 z-40 w-64 bg-white border border-black shadow-lg text-gray-800 h-full overflow-y-auto transition-transform duration-300
+        className={`fixed top-16 left-0 z-40 w-64 bg-white border border-black shadow-lg text-gray-800 h-full overflow-y-auto transition-transform duration-300
         ${isOpen ? "fixed translate-x-0" : "fixed -translate-x-full"}`}
       >
         {isOpen && (
@@ -44,7 +44,7 @@ const DashboardLayout = () => {
             to="/dashboard/my-profile"
             onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 ${
+              `block px-4 py-2 rounded hover:bg-base-300 link ${
                 isActive ? "bg-base-300 font-semibold" : ""
               }`
             }
@@ -156,10 +156,10 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <div className="bg-white px-4 py-6 border-b shadow flex items-center justify-between">
+        <div className="bg-base-200 accordion px-4 py-6 border-b shadow flex items-center justify-between sticky top-0 z-50">
           <button
             onClick={toggleSidebar}
-            className="text-2xl text-primary cursor-pointer"
+            className="text-2xl cursor-pointer"
           >
             <FiMenu />
           </button>

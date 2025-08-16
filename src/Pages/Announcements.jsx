@@ -24,7 +24,7 @@ const Announcements = () => {
             key={announcement._id}
             className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
-            <h3 className="text-xl font-semibold">{announcement.title}</h3>
+            <h3 className="text-xl font-semibold text-gray-700 ">{announcement.title}</h3>
             <p className="text-gray-700 mt-2">{announcement.description}</p>
             {announcement.createdAt && (
               <p className="text-sm text-gray-400 mt-1">

@@ -31,6 +31,7 @@
   name: "night";
   --color-primary: #3abdf8;
   --color-secondary: black/50;
+  --color-base-300: #3abdf8;
 }
 
 [data-theme="night"] {
@@ -74,5 +75,12 @@
   .accordion {
     background-color: #3abdf8;
   }
+  .dash-menu{
+    color: black/50;
+  }
+  .steps{
+    color: black/50;
+  }
+
 
 }

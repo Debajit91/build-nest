@@ -22,7 +22,7 @@ const PaymentHistory = () => {
 
       <div className="overflow-x-auto">
         <table className="table w-full border">
-          <thead className="bg-gray-200">
+          <thead className="bg-base-200 text-base-content border-2">
             <tr>
               <th>#</th>
               <th>Month</th>

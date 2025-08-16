@@ -33,7 +33,7 @@ const AboutBuilding = () => {
 
         <div className="grid md:grid-cols-2 gap-8 text-left">
           <div data-aos="fade-right">
-            <h3 className="text-2xl font-semibold mb-2">Modern Architecture</h3>
+            <h3 className="text-2xl font-semibold mb-2 apart">Modern Architecture</h3>
             <p className="text-gray-600 leading-relaxed about">
               The building boasts contemporary design, energy-efficient
               materials, and smart apartment layouts tailored for urban
@@ -42,7 +42,7 @@ const AboutBuilding = () => {
             </p>
           </div>
           <div data-aos="fade-left">
-            <h3 className="text-2xl font-semibold mb-2">Smart Amenities</h3>
+            <h3 className="text-2xl font-semibold mb-2 apart">Smart Amenities</h3>
             <p className="text-gray-600 leading-relaxed about">
               Residents enjoy access to a smart parking system, digital notice
               board, automated payment portals, 24/7 security, and responsive
