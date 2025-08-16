@@ -28,7 +28,7 @@ const Navbar = () => {
   ]
 
   const extraWhenLoggedIn = [
-    {to: '/dashboard/contact', label: "Contact"},
+    {to: '/contact', label: "Contact"},
     {to: '/community', label: "Community"},
   ]
 

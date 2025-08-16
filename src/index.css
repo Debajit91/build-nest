@@ -2,3 +2,16 @@
 @plugin "daisyui" {
   themes: light --default,  retro;
 }
+@plugin "daisyui/theme" {
+  name: "retro";
+  --color-primary: base;
+  --color-secondary: teal;
+}
+
+[data-theme="retro"] {
+  .btn:hover {
+    background-color: teal;
+    border-color: teal;
+    color:aliceblue
+  }
+}
