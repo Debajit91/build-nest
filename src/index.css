@@ -38,10 +38,13 @@
         background-color: #3abdf8;
         color: black/50;
     }
+    .feature{
+      background-color: aliceblue;
+    }
   input {
     color: white;
   }
-  h2, h3 {
+  h2{
     color: #3abdf8;
   }
   .about {
@@ -71,4 +74,5 @@
   .accordion {
     background-color: #3abdf8;
   }
+
 }
