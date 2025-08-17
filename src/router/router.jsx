@@ -24,6 +24,7 @@ import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Community from "../Pages/Community";
 import Overview from "../Pages/Overview";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "unauthorized",
         Component: Unauthorized
+      },
+      {
+        path: "*",
+        Component: ErrorPage,
       }
     ],
   },
@@ -137,6 +142,10 @@ export const router = createBrowserRouter([
         path: "manage-coupons",
         element: <AdminRoute><ManageCoupons/></AdminRoute>
       },
+      {
+        path: "*",
+        Component: ErrorPage,
+      }
     ],
   },
 ]);

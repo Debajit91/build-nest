@@ -85,7 +85,7 @@ export default function Overview() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Line chart: Monthly Rent Collection */}
-        <div className="card bg-base-100 shadow">
+        <div className="card bg-base-100 border-2 shadow">
           <div className="card-body">
             <h2 className="card-title">Monthly Rent Collection</h2>
             <ResponsiveContainer width="100%" height={280}>
@@ -108,7 +108,7 @@ export default function Overview() {
         </div>
 
         {/* Pie chart: Occupancy */}
-        <div className="card bg-base-100 shadow">
+        <div className="card bg-base-100 border-2 shadow">
           <div className="card-body">
             <h2 className="card-title">Occupancy Status</h2>
             <ResponsiveContainer width="100%" height={280}>

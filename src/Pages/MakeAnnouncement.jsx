@@ -34,7 +34,7 @@ const MakeAnnouncement = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded-lg mt-10">
+    <div className="max-w-3xl mx-auto p-6 bg-base-100 border-2 shadow rounded-lg mt-10">
       <h2 className="text-2xl font-semibold mb-4">Make Announcement</h2>
 
       {success && <p className="text-green-600 mb-4">{success}</p>}
@@ -42,10 +42,10 @@ const MakeAnnouncement = () => {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-medium mb-1">Title</label>
+          <label className="block font-medium text-primary mb-1">Title</label>
           <input
             type="text"
-            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full border px-4 py-2 rounded"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter title"
@@ -53,7 +53,7 @@ const MakeAnnouncement = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Description</label>
+          <label className="block font-medium text-primary mb-1">Description</label>
           <textarea
             className="w-full border px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
             rows="5"
@@ -65,7 +65,7 @@ const MakeAnnouncement = () => {
 
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded"
+          className="btn btn-primary px-6 py-2 rounded"
         >
           Post Announcement
         </button>

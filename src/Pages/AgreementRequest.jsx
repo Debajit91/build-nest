@@ -52,7 +52,7 @@ const AgreementRequests = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-5xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Agreement Requests</h2>
 
       {requests.length === 0 ? (

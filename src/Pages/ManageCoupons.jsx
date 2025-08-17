@@ -53,7 +53,7 @@ const ManageCoupons = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 max-w-5xl mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Manage Coupons</h2>
         <button className="btn btn-primary" onClick={() => setShowModal(true)}>
