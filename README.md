@@ -148,7 +148,7 @@ Error
 ### Contact Page (EmailJS)  
 ![Contact Page](./docs/screenshots/contact.png)
 
-### Unauthorized Page (404)  
+### Unauthorized Page (403)  
 ![Error Page](./docs/screenshots/unauthorized.png)
 
 ### Error Page (404)  
