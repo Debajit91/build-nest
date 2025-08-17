@@ -49,7 +49,7 @@ const Login = () => {
       <Toaster />
       <form onSubmit={handleLogin}>
         <div className="text-black">
-          <h2 className="text-3xl text-center mb-4">Login Your Account</h2>
+          <h3 className="text-3xl text-center mb-4">Login Your Account</h3>
 
           <div className="form-control mb-4">
             <input
@@ -74,7 +74,7 @@ const Login = () => {
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                className="absolute right-3 top-3 cursor-pointer text-xl text-primary"
               >
                 {showPassword ? <FiEyeOff /> : <FiEye />}
               </span>
@@ -82,7 +82,7 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className="btn btn-secondary login-btn text- w-full">
           Login
         </button>
 

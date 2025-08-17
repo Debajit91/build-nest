@@ -9,6 +9,10 @@
 }
 
 [data-theme="retro"] {
+  .login-btn{
+    background-color: white;
+    color: black;
+  }
   .btn:hover {
     background-color: teal;
     border-color: teal;
@@ -79,6 +83,13 @@
     color: black/50;
   }
   .steps{
+    color: black/50;
+  }
+.login {
+    background-color: #3abdf8;
+    color: black/50;
+  }
+  .login p {
     color: black/50;
   }
 

@@ -23,6 +23,7 @@ import Unauthorized from "../Pages/Unauthorized";
 import About from "../Pages/About";
 import Contact from "../Pages/Contact";
 import Community from "../Pages/Community";
+import Overview from "../Pages/Overview";
 
 
 
@@ -95,6 +96,10 @@ export const router = createBrowserRouter([
       {
         path: "my-profile",
         Component: MyProfile,
+      },
+      {
+        path: "overview",
+        Component: Overview
       },
       {
         path: "announcements",

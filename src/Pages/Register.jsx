@@ -128,7 +128,7 @@ const Register = () => {
       <Toaster />
       <form onSubmit={handleSubmit}>
         <div className="text-black">
-          <h2 className="text-3xl text-center mb-4">Register Your Account</h2>
+          <h3 className="text-3xl text-center mb-4">Register Your Account</h3>
 
           
           <div className="form-control mb-4">
@@ -190,7 +190,7 @@ const Register = () => {
                 required
               />
               <span
-                className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                className="absolute right-3 top-3 cursor-pointer text-xl text-primary"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FiEyeOff /> : <FiEye />}
@@ -201,7 +201,7 @@ const Register = () => {
 
         <button
           type="submit"
-          className="btn btn-primary w-full"
+          className="btn btn-secondary login-btn w-full"
           disabled={uploading}
         >
           {uploading ? "Registering..." : "Register"}

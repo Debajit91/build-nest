@@ -44,12 +44,24 @@ const DashboardLayout = () => {
             to="/dashboard/my-profile"
             onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
-              `block px-4 py-2 rounded hover:bg-base-300 link ${
+              `block px-4 py-2 rounded hover:bg-base-300 ${
                 isActive ? "bg-base-300 font-semibold" : ""
               }`
             }
           >
             My Profile
+          </NavLink>
+
+          <NavLink
+            to="/dashboard/overview"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded hover:bg-base-300  ${
+                isActive ? "bg-base-300 font-semibold" : ""
+              }`
+            }
+          >
+            Overview
           </NavLink>
 
           <NavLink

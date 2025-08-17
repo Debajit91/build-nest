@@ -42,7 +42,7 @@ const GoogleSignIn = () => {
   return (
     <button
       onClick={handleGoogleLogin}
-      className="btn bg-base-200 text-black btn-outline w-full flex items-center justify-center gap-2"
+      className="btn bg-base-200 text-primary btn-outline w-full flex items-center justify-center gap-2"
     >
       <FcGoogle className="text-xl" />
       Continue with Google
