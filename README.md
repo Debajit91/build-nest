@@ -46,7 +46,7 @@ The goal of **BuildNest** is to provide a robust, secure, and user-friendly buil
 | Package | Purpose |
 |--------|---------|
 | `react`, `react-dom` | Core frontend |
-| `react-router-dom` | SPA routing (public + private routes) |
+| `react-router` | SPA routing (public + private routes) |
 | `tailwindcss`, `daisyui` | Styling & theming |
 | `firebase` | Authentication |
 | `axios` | API requests |
