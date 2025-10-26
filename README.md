@@ -125,7 +125,7 @@ Error
 ## 📸 Screenshots
 
 ### Home Page  
-![Home Page](./docs/screenshots/home.png)
+![Home Page](./docs/screenshots/buildnest-home.png)
 
 ### Featured Section  
 ![Home Page](./docs/screenshots/featured.png)
@@ -133,17 +133,10 @@ Error
 ### Neighbor & Commute Section  
 ![Home Page](./docs/screenshots/neighbor&commute.png)
 
-### Dashboard → Overview (Stats + Charts)  
-![Dashboard Overview](./docs/screenshots/dashboard-overview.png)
 
 ### Apartments Page  
 ![Apartments](./docs/screenshots/apartments.png)
 
-### Announcements Page  
-![Announcements](./docs/screenshots/announcements.png)
-
-### Move-In Guide Section  
-![Move-In Guide](./docs/screenshots/move-in-guide.png)
 
 ### Contact Page (EmailJS)  
 ![Contact Page](./docs/screenshots/contact.png)
