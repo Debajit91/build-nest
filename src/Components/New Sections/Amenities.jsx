@@ -45,7 +45,7 @@ const Amenities = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-3xl font-bold text-center mb-6 text-secondary"
+        className="text-3xl font-bold text-center mb-6"
       >
         Amenities & Facilities
       </motion.h2>
@@ -65,7 +65,7 @@ const Amenities = () => {
             className="stat bg-base-200 highlight rounded-box text-center py-6 shadow-md hover:shadow-lg cursor-pointer"
           >
             <motion.div
-              className="text-2xl mx-auto mb-2 text-secondary"
+              className="text-2xl mx-auto mb-2 "
               animate={{ y: [0, -5, 0] }}
               whileHover={{
                 scale: 1.08,

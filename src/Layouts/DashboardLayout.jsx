@@ -24,12 +24,12 @@ const DashboardLayout = () => {
     <div className="min-h-screen flex text-base-content">
       {/* Sidebar */}
       <div
-        className={`fixed top-16 left-0 z-40 w-64 bg-white border border-black shadow-lg text-gray-800 h-full overflow-y-auto transition-transform duration-300
+        className={`fixed top-16 left-0 z-40 w-64 border border-black shadow-lg text-gray-800 h-full overflow-y-auto transition-transform duration-300
         ${isOpen ? "fixed translate-x-0" : "fixed -translate-x-full"}`}
       >
         {isOpen && (
           <div
-            className="fixed inset-0 bg-white bg-opacity-30 backdrop-blur-sm z-20"
+            className="fixed inset-0 bg-opacity-30 backdrop-blur-sm z-20 bg-white"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -39,7 +39,7 @@ const DashboardLayout = () => {
           </Link>
         </div>
 
-        <nav className="p-4 space-y-2 z-40 relative">
+        <nav className="p-4 space-y-2 nav z-40 relative">
           <NavLink
             to="/dashboard/my-profile"
             onClick={() => setIsOpen(false)}
@@ -168,14 +168,14 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <div className="bg-base-200 accordion px-4 py-6 border-b shadow flex items-center justify-between sticky top-0 z-50">
+        <div className="bg-base-200 accordion px-4 py-6 dark:border-black/50 border-b shadow flex items-center justify-between sticky top-0 z-50">
           <button
             onClick={toggleSidebar}
-            className="text-2xl cursor-pointer"
+            className="text-2xl cursor-pointer dark:text-black/50"
           >
             <FiMenu />
           </button>
-          <span className="text-sm font-medium">{user?.displayName}</span>
+          <span className="text-sm dark:text-black/50 font-medium">{user?.displayName}</span>
         </div>
 
         {/* Page Content */}

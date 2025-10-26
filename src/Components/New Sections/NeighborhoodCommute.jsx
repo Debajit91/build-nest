@@ -6,7 +6,7 @@ const NeighborhoodCommute = () => {
   return (
     <section title="Neighborhood & Commute" className="py-16 my-10">
       <div className="text-primary">
-        <h2 className="text-3xl font-bold text-center mb-10 text-secondary">
+        <h2 className="text-3xl font-bold text-center mb-10 ">
           Neighborhood & Commute
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">

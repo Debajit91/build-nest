@@ -28,8 +28,8 @@ const MyProfile = () => {
     : "None";
 
   return (
-    <div className="p-6 max-w-2xl mx-auto bg-white shadow rounded-lg text-gray-800">
-      <h2 className="text-2xl font-semibold mb-4">My Profile</h2>
+    <div className="p-6 max-w-2xl mx-auto shared shadow rounded-lg text-gray-800">
+      <h3 className="text-2xl profile font-semibold mb-4">My Profile</h3>
 
       {/* User Info */}
       <div className="flex items-center gap-4 mb-6">
@@ -41,7 +41,7 @@ const MyProfile = () => {
         <div>
           <h3 className="text-xl font-medium">{user?.displayName || "N/A"}</h3>
           <p>{user?.email || "N/A"}</p>
-          <p className="text-sm text-gray-500">Role: {role || "N/A"}</p>
+          <p className="text-sm text-gray-700">Role: {role || "N/A"}</p>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ const AdminStats = () => {
   if (isError) return <p className="text-red-500">Failed to load stats.</p>;
 
   return (
-    <div className="mt-6 bg-gray-100 p-4 rounded">
+    <div className="mt-6 p-4 rounded">
       <h3 className="text-lg font-semibold mb-4">Admin Dashboard Stats</h3>
       <p>Total Rooms: {stats.totalRooms}</p>
       <p>Available Rooms: {stats.availableRoomsPercentage}%</p>

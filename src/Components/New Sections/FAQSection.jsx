@@ -31,7 +31,7 @@ const FAQSection = () => {
 
   return (
     <section className="w-full bg-base-100 py-12">
-      <h2 className="text-3xl font-semibold text-center mb-8 text-secondary">
+      <h2 className="text-3xl font-semibold text-center mb-8">
         Frequently Asked Questions
       </h2>
       <div className="max-w-3xl mx-auto space-y-4">
@@ -42,7 +42,7 @@ const FAQSection = () => {
             className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
           >
             <input type="checkbox" />
-            <div className="collapse-title text-lg text-secondary font-medium accordion">
+            <div className="collapse-title text-lg  font-medium accordion">
               
               {faq.question}
             </div>

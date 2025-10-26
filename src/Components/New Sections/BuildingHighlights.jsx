@@ -4,17 +4,17 @@ import buildingImg from "../../assets/images/slide2.jpg";
 const BuildingHighlights = () => {
   const highlights = [
     {
-      icon: <FaUserShield className="text-3xl text-secondary" />,
+      icon: <FaUserShield className="text-3xl" />,
       title: "Safety & Supervision",
       desc: "With 24/7 CCTV surveillance and dedicated security personnel, we ensure every resident feels completely safe within BuildNest.",
     },
     {
-      icon: <FaTools className="text-3xl text-secondary" />,
+      icon: <FaTools className="text-3xl" />,
       title: "Smart Maintenance",
       desc: "From plumbing to electrical support, our maintenance team responds swiftly to every request, keeping your home worry-free.",
     },
     {
-      icon: <FaBuilding className="text-3xl text-secondary" />,
+      icon: <FaBuilding className="text-3xl" />,
       title: "Modern Infrastructure",
       desc: "Our apartments feature premium interiors, high-speed elevators, and eco-friendly architecture designed for comfort and sustainability.",
     },
@@ -34,7 +34,7 @@ const BuildingHighlights = () => {
 
         {/* Text Section */}
         <div className="lg:w-1/2 space-y-6">
-          <h2 className="text-3xl lg:text-4xl font-bold text-secondary">
+          <h2 className="text-3xl lg:text-4xl font-bold ">
             Why Our Building Stands Out
           </h2>
           <p className="text-base-content/70">

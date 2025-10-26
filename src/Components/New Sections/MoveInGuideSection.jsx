@@ -5,7 +5,7 @@ const MoveInGuideSection = () => {
     return (
         <section className="w-full bg-base-100 py-12">
       <div>
-        <h2 className="text-3xl font-bold text-secondary mb-6 text-center">Move-In Guide & Policies</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">Move-In Guide & Policies</h2>
 
         {/* 1) Quick Steps */}
         <div className="mb-8 text-center">
@@ -21,7 +21,7 @@ const MoveInGuideSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <div className="card bg-base-200 highlight shadow">
             <div className="card-body">
-              <h3 className="card-title text-secondary">Move-In Checklist</h3>
+              <h3 className="card-title">Move-In Checklist</h3>
               <ul className="list-disc list-inside space-y-2 text-sm">
                 <li className='text-black/70'>Valid ID & basic documents</li>
                 <li className='text-black/70'>Deposit & first month’s rent</li>
@@ -37,7 +37,7 @@ const MoveInGuideSection = () => {
 
           <div className="card bg-base-200 highlight shadow">
             <div className="card-body">
-              <h3 className="card-title text-secondary">What to Expect</h3>
+              <h3 className="card-title">What to Expect</h3>
               <p className="text-sm">
                 Our team will confirm your booking, share payment instructions, and schedule key pickup. 
                 You’ll also receive building access info and amenity guidelines.
@@ -50,7 +50,7 @@ const MoveInGuideSection = () => {
 
           <div className="card bg-base-200 highlight shadow">
             <div className="card-body">
-              <h3 className="card-title text-secondary">Need Help Fast?</h3>
+              <h3 className="card-title ">Need Help Fast?</h3>
               <p className="text-sm">
                 For urgent assistance or special accommodations, reach out and we’ll assist you.
               </p>
@@ -64,7 +64,7 @@ const MoveInGuideSection = () => {
           <div className="space-y-3">
             <div className="collapse collapse-arrow bg-base-200 shadow accordion">
               <input type="checkbox" defaultChecked />
-              <div className="collapse-title text-lg font-medium text-secondary">Payments & Refunds</div>
+              <div className="collapse-title text-lg font-medium ">Payments & Refunds</div>
               <div className="collapse-content text-sm">
                 <p>Rent is due monthly. Deposits are refundable per agreement terms. 
                 Late fees may apply after the grace period.</p>
@@ -72,7 +72,7 @@ const MoveInGuideSection = () => {
             </div>
             <div className="collapse collapse-arrow bg-base-200 shadow accordion">
               <input type="checkbox" />
-              <div className="collapse-title text-lg font-medium text-secondary">Pets & Parking</div>
+              <div className="collapse-title text-lg font-medium ">Pets & Parking</div>
               <div className="collapse-content text-sm">
                 <p>Pet-friendly units may require a pet deposit. Parking allocations vary by building—ask the office.</p>
               </div>
@@ -82,14 +82,14 @@ const MoveInGuideSection = () => {
           <div className="space-y-3">
             <div className="collapse collapse-arrow bg-base-200 shadow accordion">
               <input type="checkbox" />
-              <div className="collapse-title text-lg font-medium text-secondary">Maintenance & Access</div>
+              <div className="collapse-title text-lg font-medium ">Maintenance & Access</div>
               <div className="collapse-content text-sm">
                 <p>Report issues via the Contact page. For emergency access or lockouts, call the number listed in your welcome email.</p>
               </div>
             </div>
             <div className="collapse collapse-arrow bg-base-200 shadow accordion">
               <input type="checkbox" />
-              <div className="collapse-title text-lg font-medium text-secondary">Community Etiquette</div>
+              <div className="collapse-title text-lg font-medium ">Community Etiquette</div>
               <div className="collapse-content text-sm">
                 <p>Please observe quiet hours and keep shared spaces clean. Follow posted rules for amenities.</p>
               </div>

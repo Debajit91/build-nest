@@ -50,7 +50,7 @@ const WhyChooseBuildNest = () => {
   return (
     <section className="w-full bg-base-200 py-12 rounded-xl">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-secondary mb-4">Why Choose BuildNest?</h2>
+        <h2 className="text-3xl font-bold mb-4">Why Choose BuildNest?</h2>
         <p className="text-base-content/80 mb-12">
           Simplifying apartment rentals and management for tenants and landlords
           alike.
@@ -66,7 +66,7 @@ const WhyChooseBuildNest = () => {
               viewport={{ once: true, amount: 0.3 }}
               variants={cardVariants}
             >
-              <div className="text-secondary mb-4">{feature.icon}</div>
+              <div className=" mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p>{feature.description}</p>
             </motion.div>

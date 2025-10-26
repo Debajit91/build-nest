@@ -13,6 +13,9 @@
     background-color: white;
     color: black;
   }
+  .btn{
+    color: #793205;
+  }
   .btn:hover {
     background-color: #793205;
     border-color: #793205;
@@ -28,6 +31,7 @@
     border-color: #793205;
     color: aliceblue;
   }
+
   
 }
 
@@ -44,6 +48,7 @@
         background-color: #3abdf8;
         color: black/50;
     }
+    
     .feature{
       background-color: aliceblue;
     }
@@ -98,6 +103,12 @@
   .login p {
     color: black/50;
   }
+
+  .NavLink:hover {
+    color: black/50;
+  }
+  
+  
 
 
 }

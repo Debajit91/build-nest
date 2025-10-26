@@ -56,14 +56,14 @@ const About = () => {
 
       {/* Mission & Values */}
       <div className="max-w-7xl mx-auto px-6 pb-6 mission">
-        <h2 className="text-2xl font-semibold text-secondary mb-4">Our Mission</h2>
+        <h2 className="text-2xl font-semibold  mb-4">Our Mission</h2>
         <p className="mb-8">
           BuildNest streamlines life for residents and management. From booking
           to payments and timely updates, we bring everything together with a
           simple, secure experience.
         </p>
 
-        <h2 className="text-2xl font-semibold text-secondary mb-4">
+        <h2 className="text-2xl font-semibold mb-4">
           Why Choose BuildNest?
         </h2>
         <ul className="list-disc list-inside space-y-2 mb-8">
@@ -76,7 +76,7 @@ const About = () => {
 
       {/* FAQ */}
       <div className="max-w-7xl mx-auto px-6 pb-16">
-        <h2 className="text-2xl font-semibold text-secondary mb-6">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-semibold  mb-6">Frequently Asked Questions</h2>
 
         <div className="space-y-3">
           {faqs.map((item, idx) => (
