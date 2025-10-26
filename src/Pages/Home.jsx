@@ -11,6 +11,7 @@ import NewFeature from '../Components/New Sections/NewFeature';
 import MoveInGuideSection from '../Components/New Sections/MoveInGuideSection';
 import FAQSection from '../Components/New Sections/FAQSection';
 import BuildingHighlights from '../Components/New Sections/BuildingHighlights';
+import WhyChooseBuildNest from '../Components/New Sections/WhyChooseBuildNest';
 
 const Home = () => {
     return (
@@ -25,6 +26,7 @@ const Home = () => {
             <BuildingHighlights/>
             <NeighborhoodCommute/>
             <Testimonials/>
+            <WhyChooseBuildNest/>
             <FAQSection/>
             <MoveInGuideSection/>
         </div>
