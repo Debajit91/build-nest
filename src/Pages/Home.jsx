@@ -10,6 +10,7 @@ import HowItWorks from '../Components/New Sections/HowItWorks';
 import NewFeature from '../Components/New Sections/NewFeature';
 import MoveInGuideSection from '../Components/New Sections/MoveInGuideSection';
 import FAQSection from '../Components/New Sections/FAQSection';
+import BuildingHighlights from '../Components/New Sections/BuildingHighlights';
 
 const Home = () => {
     return (
@@ -22,6 +23,7 @@ const Home = () => {
             <HowItWorks/>
             <Amenities/>
             <NeighborhoodCommute/>
+            <BuildingHighlights/>
             <Testimonials/>
             <FAQSection/>
             <MoveInGuideSection/>
