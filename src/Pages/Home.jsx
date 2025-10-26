@@ -16,10 +16,13 @@ const Home = () => {
             <Banner/>
             <AboutBuilding/>
             <NewFeature/>
-            <CouponShowcase/>
-            <Location/>
             <HowItWorks/>
+            <Location/>
+            <CouponShowcase/>
             <Amenities/>
+            
+            
+            
             <NeighborhoodCommute/>
             <Testimonials/>
             <MoveInGuideSection/>
