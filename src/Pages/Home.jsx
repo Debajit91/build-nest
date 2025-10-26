@@ -22,8 +22,8 @@ const Home = () => {
             <Location/>
             <HowItWorks/>
             <Amenities/>
-            <NeighborhoodCommute/>
             <BuildingHighlights/>
+            <NeighborhoodCommute/>
             <Testimonials/>
             <FAQSection/>
             <MoveInGuideSection/>
