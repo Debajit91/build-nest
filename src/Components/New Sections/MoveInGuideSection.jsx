@@ -98,7 +98,7 @@ const MoveInGuideSection = () => {
         </div>
 
         {/* Footer CTAs */}
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link to="/apartments" className="btn btn-primary">Start Browsing</Link>
           <Link to="/contact" className="btn btn-primary">Contact Us</Link>
         </div>
