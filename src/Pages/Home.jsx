@@ -9,6 +9,7 @@ import Testimonials from '../Components/New Sections/Testimonials';
 import HowItWorks from '../Components/New Sections/HowItWorks';
 import NewFeature from '../Components/New Sections/NewFeature';
 import MoveInGuideSection from '../Components/New Sections/MoveInGuideSection';
+import FAQSection from '../Components/New Sections/FAQSection';
 
 const Home = () => {
     return (
@@ -16,15 +17,13 @@ const Home = () => {
             <Banner/>
             <AboutBuilding/>
             <NewFeature/>
-            <HowItWorks/>
-            <Location/>
             <CouponShowcase/>
+            <Location/>
+            <HowItWorks/>
             <Amenities/>
-            
-            
-            
             <NeighborhoodCommute/>
             <Testimonials/>
+            <FAQSection/>
             <MoveInGuideSection/>
         </div>
     );
