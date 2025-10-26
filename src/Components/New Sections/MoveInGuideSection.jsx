@@ -23,10 +23,10 @@ const MoveInGuideSection = () => {
             <div className="card-body">
               <h3 className="card-title text-secondary">Move-In Checklist</h3>
               <ul className="list-disc list-inside space-y-2 text-sm">
-                <li>Valid ID & basic documents</li>
-                <li>Deposit & first month’s rent</li>
-                <li>Utility setup (if applicable)</li>
-                <li>Parking/Access passes</li>
+                <li className='text-base-100'>Valid ID & basic documents</li>
+                <li className='text-base-100'>Deposit & first month’s rent</li>
+                <li className='text-base-100'>Utility setup (if applicable)</li>
+                <li className='text-base-100'>Parking/Access passes</li>
               </ul>
               <div className="card-actions mt-4">
                 <Link to="/apartments" className="btn btn-outline btn-sm">Find an apartment</Link>
