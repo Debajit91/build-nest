@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../api/axiosInstance"; 
 import { Link } from "react-router";
 
-function pickTop4(raw = []) {
+function pickTop6(raw = []) {
   const byDateDesc = (a, b) =>
     new Date(b?.createdAt || 0) - new Date(a?.createdAt || 0);
 
@@ -13,14 +13,14 @@ function pickTop4(raw = []) {
   const feats = raw
     .filter((a) => a?.featured || a?.isFeatured)
     .sort(byDateDesc);
-  if (feats.length >= 4) return feats.slice(0, 4);
+  if (feats.length >= 6) return feats.slice(0, 6);
 
   // 2) Otherwise, fill from the newest overall
   const rest = raw
     .filter((a) => !(a?.featured || a?.isFeatured))
     .sort(byDateDesc);
 
-  return [...feats, ...rest].slice(0, 4);
+  return [...feats, ...rest].slice(0, 6);
 }
 
 export default function NewFeature() {
@@ -33,13 +33,13 @@ export default function NewFeature() {
     queryFn: async () => {
       // Ask server for 3 newest (if supported). If not, we’ll slice on client.
       const res = await axiosInstance.get("/apartments", {
-        params: { limit: 4, sort: "-createdAt" },
+        params: { limit: 6, sort: "-createdAt" },
       });
       const raw = Array.isArray(res.data)
         ? res.data
         : res.data?.apartments ?? [];
       // If server returns more, pick 3 on client; if exactly 3, this is a no-op.
-      return pickTop4(raw);
+      return pickTop6(raw);
     },
   });
 
@@ -47,7 +47,7 @@ export default function NewFeature() {
     return (
       <section className="w-full bg-base-200 py-12">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(3)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <div key={i} className="card bg-base-100 shadow animate-pulse">
               <div className="h-40 w-full bg-base-200" />
               <div className="card-body">
