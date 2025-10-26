@@ -11,7 +11,7 @@ import {
 const Amenities = () => {
   return (
     <section className="py-16 my-10">
-        <h2 className="text-3xl font-bold text-center mb-6">Amenities & Facilities</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-secondary">Amenities & Facilities</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {[
           { icon: <FaWifi />, label: "High‑Speed Wi‑Fi" },

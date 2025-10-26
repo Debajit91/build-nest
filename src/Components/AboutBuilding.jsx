@@ -5,7 +5,7 @@ const AboutBuilding = () => {
     <section className="my-10 py-16  text-gray-800">
       <div className="text-center">
         <h2
-          className="text-3xl font-bold mb-6 text-primary"
+          className="text-3xl font-bold mb-6 text-secondary"
           data-aos="fade-up"
         >
           About the Building

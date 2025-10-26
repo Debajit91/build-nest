@@ -77,7 +77,7 @@ export default function NewFeature() {
   return (
     <section className="w-full bg-base-200 py-12 rounded-xl">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-6">New & Featured</h2>
+        <h2 className="text-3xl font-bold text-center text-secondary mb-6">New & Featured</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.map((a) => (
