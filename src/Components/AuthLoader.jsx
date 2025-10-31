@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import useAuth from "../Hooks/useAuth";
 import { auth } from "../Firebase/Firebase.init";
+import LoadingScreen from "./Loader/LoadingScreen";
 
 
 const AuthLoader = ({ children }) => {
@@ -17,7 +18,7 @@ const AuthLoader = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <p className="text-center mt-10"><LoadingScreen/></p>;
 
   return children;
 };

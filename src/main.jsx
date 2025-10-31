@@ -19,6 +19,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import AuthLoader from "./Components/AuthLoader.jsx";
 import Loader from "./Components/Loader.jsx";
 
+
 const queryClient = new QueryClient();
 
 AOS.init({

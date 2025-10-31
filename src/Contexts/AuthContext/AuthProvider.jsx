@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../../Firebase/Firebase.init';
+import LoadingScreen from '../../Components/Loader/LoadingScreen';
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -55,7 +56,7 @@ const AuthProvider = ({children}) => {
     }
     return (
         <AuthContext.Provider value={authInfo}>
-            {!loading ? children : <div className="text-center mt-10">Loading...</div>}
+            {!loading ? children : <div className="text-center mt-10"><LoadingScreen/></div>}
         </AuthContext.Provider>
     );
 };

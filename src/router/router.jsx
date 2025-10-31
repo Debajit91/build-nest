@@ -3,6 +3,9 @@ import React, { Suspense, lazy } from "react";
 import PrivateRoute from "../Routes/PrivateRoute";
 import MemberRoute from "../Routes/MemberRoute";
 import AdminRoute from "../Routes/AdminRoute";
+import LoadingScreen from "../Components/Loader/LoadingScreen";
+
+
 
 // Lazy load layouts and pages
 const RootLayout = lazy(() => import("../Layouts/RootLayout"));
@@ -34,7 +37,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+      <Suspense
+        fallback={
+          <LoadingScreen/>
+        }
+      >
         <RootLayout />
       </Suspense>
     ),
@@ -65,7 +72,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+      <Suspense
+        fallback={
+          <LoadingScreen/>
+        }
+      >
         <AuthLayout />
       </Suspense>
     ),
@@ -78,7 +89,11 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+        <Suspense
+          fallback={
+            <LoadingScreen/>
+          }
+        >
           <DashboardLayout />
         </Suspense>
       </PrivateRoute>

@@ -11,46 +11,28 @@ const CouponShowcase = () => {
   if (!coupons.length) return null;
   return (
     <section className="py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">
-        Available Coupons
-      </h2>
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: { opacity: 0, y: 50 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-              staggerChildren: 0.2,
-              duration: 0.8,
-              ease: "easeOut",
-            },
-          },
-        }}
-      >
+      <h2 className="text-3xl font-bold text-center mb-6">Available Coupons</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {coupons.map((coupon) => (
-          <motion.div
+          <div
             key={coupon._id}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            whileHover={{
-              scale: 1.05,
-              rotate: 1,
-              boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
-            }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 200 }}
+            // variants={{
+            //   hidden: { opacity: 0, y: 30 },
+            //   visible: { opacity: 1, y: 0 },
+            // }}
+            // whileHover={{
+            //   scale: 1.05,
+            //   rotate: 1,
+            //   boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
+            // }}
+            // whileTap={{ scale: 0.97 }}
+            // transition={{ type: "spring", stiffness: 200 }}
             className="border p-5 rounded-lg shadow-md bg-white transition duration-300"
           >
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              style={{ transformOrigin: "left" }}
+              animate={{ rotate: [10, -6, 8, -4, 6, -2, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
               className="flex items-center gap-3 mb-2"
             >
               <FaTag className="text-primary text-xl" />
@@ -60,9 +42,9 @@ const CouponShowcase = () => {
             <span className="inline-block bg-primary text-white px-3 py-1 rounded text-sm font-bold">
               {coupon.discount}% OFF
             </span>
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };
