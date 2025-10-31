@@ -31,14 +31,14 @@ export default function NewFeature() {
   } = useQuery({
     queryKey: ["featured-apartments"],
     queryFn: async () => {
-      // Ask server for 3 newest (if supported). If not, we’ll slice on client.
+      
       const res = await axiosInstance.get("/apartments", {
         params: { limit: 6, sort: "-createdAt" },
       });
       const raw = Array.isArray(res.data)
         ? res.data
         : res.data?.apartments ?? [];
-      // If server returns more, pick 3 on client; if exactly 3, this is a no-op.
+      
       return pickTop6(raw);
     },
   });

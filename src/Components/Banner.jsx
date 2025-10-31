@@ -44,7 +44,7 @@ const Banner = () => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full">
-              <img
+              <img loading="lazy"
                 src={slide.img}
                 alt={slide.title}
                 className="w-full h-full object-cover rounded-2xl"

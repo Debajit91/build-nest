@@ -1,151 +1,151 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import RootLayout from "../Layouts/RootLayout";
-import Home from "../Pages/Home";
-import DashboardLayout from "../Layouts/DashboardLayout";
-import ManageCoupons from "../Pages/ManageCoupons";
-import AuthLayout from "../Layouts/AuthLayout";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
+import React, { Suspense, lazy } from "react";
 import PrivateRoute from "../Routes/PrivateRoute";
-import Apartments from "../Pages/Apartments";
-import MyProfile from "../Pages/MyProfile";
-import Announcements from "../Pages/Announcements";
-import MakePayment from "../Pages/MakePayment";
-import PaymentHistory from "../Pages/PaymentHistory";
 import MemberRoute from "../Routes/MemberRoute";
-import MakeAnnouncement from "../Pages/MakeAnnouncement";
-import AgreementRequests from "../Pages/AgreementRequest";
 import AdminRoute from "../Routes/AdminRoute";
-import ManageMembers from "../Pages/ManageMembers";
-import StripeWrapper from "../Pages/StripeWrapper";
-import PaymentSuccess from "../Pages/PaymentSuccess";
-import Unauthorized from "../Pages/Unauthorized";
-import About from "../Pages/About";
-import Contact from "../Pages/Contact";
-import Community from "../Pages/Community";
-import Overview from "../Pages/Overview";
-import ErrorPage from "../Pages/ErrorPage";
 
+// Lazy load layouts and pages
+const RootLayout = lazy(() => import("../Layouts/RootLayout"));
+const AuthLayout = lazy(() => import("../Layouts/AuthLayout"));
+const DashboardLayout = lazy(() => import("../Layouts/DashboardLayout"));
+const Home = lazy(() => import("../Pages/Home"));
+const Apartments = lazy(() => import("../Pages/Apartments"));
+const About = lazy(() => import("../Pages/About"));
+const Contact = lazy(() => import("../Pages/Contact"));
+const Community = lazy(() => import("../Pages/Community"));
+const Unauthorized = lazy(() => import("../Pages/Unauthorized"));
+const ErrorPage = lazy(() => import("../Pages/ErrorPage"));
+const Login = lazy(() => import("../Pages/Login"));
+const Register = lazy(() => import("../Pages/Register"));
+const MyProfile = lazy(() => import("../Pages/MyProfile"));
+const Overview = lazy(() => import("../Pages/Overview"));
+const Announcements = lazy(() => import("../Pages/Announcements"));
+const MakePayment = lazy(() => import("../Pages/MakePayment"));
+const PaymentHistory = lazy(() => import("../Pages/PaymentHistory"));
+const StripeWrapper = lazy(() => import("../Pages/StripeWrapper"));
+const PaymentSuccess = lazy(() => import("../Pages/PaymentSuccess"));
+const MakeAnnouncement = lazy(() => import("../Pages/MakeAnnouncement"));
+const AgreementRequests = lazy(() => import("../Pages/AgreementRequest"));
+const ManageMembers = lazy(() => import("../Pages/ManageMembers"));
+const ManageCoupons = lazy(() => import("../Pages/ManageCoupons"));
 
-
+// Wrap all routes with Suspense fallback
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: RootLayout,
+    element: (
+      <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+        <RootLayout />
+      </Suspense>
+    ),
     children: [
-      {
-        path: "/",
-        Component: Home,
-      },
-      {
-        path: "apartments",
-        Component: Apartments,
-      },
-      {
-        path: "about",
-        Component: About
-      },
+      { path: "/", element: <Home /> },
+      { path: "apartments", element: <Apartments /> },
+      { path: "about", element: <About /> },
       {
         path: "contact",
         element: (
           <PrivateRoute>
-            <Contact/>
+            <Contact />
           </PrivateRoute>
-        )
+        ),
       },
       {
         path: "community",
         element: (
           <PrivateRoute>
-            <Community/>
+            <Community />
           </PrivateRoute>
-        )
+        ),
       },
-      {
-        path: "unauthorized",
-        Component: Unauthorized
-      },
-      {
-        path: "*",
-        Component: ErrorPage,
-      }
+      { path: "unauthorized", element: <Unauthorized /> },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
   {
     path: "/",
-    Component: AuthLayout,
+    element: (
+      <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+        <AuthLayout />
+      </Suspense>
+    ),
     children: [
-      {
-        path: "login",
-        Component: Login,
-      },
-      {
-        path: "register",
-        Component: Register,
-      },
-      
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
     ],
   },
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <DashboardLayout />
+        <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+          <DashboardLayout />
+        </Suspense>
       </PrivateRoute>
     ),
     children: [
-      {
-        index: true,
-        element: <Navigate to="/dashboard/my-profile" replace />,
-      },
-      {
-        path: "my-profile",
-        Component: MyProfile,
-      },
-      {
-        path: "overview",
-        Component: Overview
-      },
-      {
-        path: "announcements",
-        Component: Announcements,
-      },
+      { index: true, element: <Navigate to="/dashboard/my-profile" replace /> },
+      { path: "my-profile", element: <MyProfile /> },
+      { path: "overview", element: <Overview /> },
+      { path: "announcements", element: <Announcements /> },
       {
         path: "make-payment",
-        element: <MemberRoute><MakePayment/></MemberRoute>
+        element: (
+          <MemberRoute>
+            <MakePayment />
+          </MemberRoute>
+        ),
       },
-      {
-        path: "checkout",
-        element: <StripeWrapper/>
-      },
+      { path: "checkout", element: <StripeWrapper /> },
       {
         path: "payment-success",
-        element: <MemberRoute><PaymentSuccess/></MemberRoute>
+        element: (
+          <MemberRoute>
+            <PaymentSuccess />
+          </MemberRoute>
+        ),
       },
       {
         path: "payment-history",
-        element: <MemberRoute><PaymentHistory/></MemberRoute>
+        element: (
+          <MemberRoute>
+            <PaymentHistory />
+          </MemberRoute>
+        ),
       },
       {
         path: "make-announcement",
-        element: <AdminRoute><MakeAnnouncement/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <MakeAnnouncement />
+          </AdminRoute>
+        ),
       },
       {
         path: "agreement-requests",
-        element: <AdminRoute><AgreementRequests/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AgreementRequests />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-members",
-        element: <AdminRoute><ManageMembers/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <ManageMembers />
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-coupons",
-        element: <AdminRoute><ManageCoupons/></AdminRoute>
+        element: (
+          <AdminRoute>
+            <ManageCoupons />
+          </AdminRoute>
+        ),
       },
-      {
-        path: "*",
-        Component: ErrorPage,
-      }
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);

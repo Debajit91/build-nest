@@ -112,7 +112,7 @@ const Apartments = () => {
         {data?.apartments?.map((apt) => (
           <div key={apt._id} className="card apart bg-base-100 shadow-xl">
             <figure>
-              <img
+              <img loading="lazy"
                 src={apt.image}
                 alt="Apartment"
                 className="h-48 w-full object-cover"
